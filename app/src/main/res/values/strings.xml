@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Proj2</string>
+    <string name="playButtonText">PLAY</string>
+
+    <string name="storyButtonText">SCROLL</string>
+
+    <string name="movementButtonText">MOVE</string>
+
+    <string name="questionText">QUESTION: </string>
+    <string name="answerButtonText">ANSWER</string>
+
+    <string name="winText">YOU WIN!</string>
+    <string name="loseText">YOU LOSE</string>
+    <string name="replayButtonText">REPLAY</string>
+    <string name="menuButtonText">MENU</string>
+
+    <string name="lastGameText">LAST GAME</string>
+    <string name="tttButtonText">TIC TAC TOE</string>
+    <string name="clarifaiButtonTest">CLARIFAI</string>
+</resources>

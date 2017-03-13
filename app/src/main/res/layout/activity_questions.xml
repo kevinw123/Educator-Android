@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_questions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorQuestion"
+    tools:context="com.group25.proj2.QuestionsActivity">
+
+    <RelativeLayout
+        android:id="@+id/questionLayout"
+        android:background="@color/colorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What is 1 + 1?"
+            android:textSize="@dimen/questionText_size"
+            android:textColor="@color/colorQuestion"/>
+
+        <TextView
+            android:id="@+id/aText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/questionText"
+            android:text="A. 1"
+            android:textSize="@dimen/answerText_size"
+            android:textColor="@color/colorQuestion"/>
+
+        <TextView
+            android:id="@+id/bText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/aText"
+            android:text="B. 2"
+            android:textSize="@dimen/answerText_size"
+            android:textColor="@color/colorQuestion"/>
+
+        <TextView
+            android:id="@+id/cText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bText"
+            android:text="C. 3"
+            android:textSize="@dimen/answerText_size"
+            android:textColor="@color/colorQuestion"/>
+
+        <TextView
+            android:id="@+id/dText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cText"
+            android:text="D. 4"
+            android:textSize="@dimen/answerText_size"
+            android:textColor="@color/colorQuestion"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/answerButtons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/questionLayout"
+        android:layout_above="@+id/livesLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:id="@+id/topAnswerButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/upButton"
+                android:layout_centerHorizontal="true" >
+
+                <Button
+                    android:id="@+id/aButton"
+                    android:background="@color/colorText"
+                    android:layout_width="@dimen/arrow_size"
+                    android:layout_height="@dimen/arrow_size"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="A"
+                    android:textSize="@dimen/buttonText_size"
+                    android:textColor="@color/colorQuestion" />
+
+                <Button
+                    android:id="@+id/bButton"
+                    android:background="@color/colorText"
+                    android:layout_width="@dimen/arrow_size"
+                    android:layout_height="@dimen/arrow_size"
+                    android:text="B"
+                    android:textSize="@dimen/buttonText_size"
+                    android:textColor="@color/colorQuestion"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomAnswerButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topAnswerButtons"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:id="@+id/cButton"
+                    android:background="@color/colorText"
+                    android:layout_width="@dimen/arrow_size"
+                    android:layout_height="@dimen/arrow_size"
+                    android:layout_marginRight="10dp"
+                    android:text="C"
+                    android:textSize="@dimen/buttonText_size"
+                    android:textColor="@color/colorQuestion" />
+
+                <Button
+                    android:id="@+id/dButton"
+                    android:background="@color/colorText"
+                    android:layout_width="@dimen/arrow_size"
+                    android:layout_height="@dimen/arrow_size"
+                    android:text="D"
+                    android:textSize="@dimen/buttonText_size"
+                    android:textColor="@color/colorQuestion"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bottomAnswerButtons"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/buttonText_margin_top"
+                android:text="@string/answerButtonText"
+                android:textSize="@dimen/buttonText_size"
+                android:textColor="@color/colorText"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/livesLayout"
+        android:background="@color/colorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lives: "
+                android:textSize="30sp"
+                android:textColor="@color/colorQuestion"/>
+
+            <ImageView
+                android:id="@+id/heart1"
+                android:layout_width="@dimen/questionText_size"
+                android:layout_height="@dimen/questionText_size"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/hearts"/>
+
+            <ImageView
+                android:id="@+id/heart2"
+                android:layout_width="@dimen/questionText_size"
+                android:layout_height="@dimen/questionText_size"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/hearts"/>
+
+            <ImageView
+                android:id="@+id/heart3"
+                android:layout_width="@dimen/questionText_size"
+                android:layout_height="@dimen/questionText_size"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/hearts_black"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

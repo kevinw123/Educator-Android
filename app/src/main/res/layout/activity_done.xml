@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_done"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorWin"
+    tools:context="com.group25.proj2.DoneActivity">
+
+    <TextView
+        android:id="@+id/doneMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/title_size"/>
+
+
+    <LinearLayout
+        android:id="@+id/replayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/replayButton"
+                android:background="@drawable/replaybutton"
+                android:layout_width="150dip"
+                android:layout_height="150dip"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/replayText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/replayButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/buttonText_margin_top"
+                android:text="@string/replayButtonText"
+                android:textSize="@dimen/buttonText_size"
+                android:textColor="@color/colorText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/menuButton"
+                android:background="@drawable/menubutton"
+                android:layout_width="150dip"
+                android:layout_height="150dip"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/menuText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/menuButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/buttonText_margin_top"
+                android:text="@string/menuButtonText"
+                android:textSize="@dimen/buttonText_size"
+                android:textColor="@color/colorText"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

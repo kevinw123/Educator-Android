@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorMenu">#41035E</color>
+    <color name="colorStory">#9D1026</color>
+    <color name="colorMovement">#0A988E</color>
+
+    <color name="colorQuestion">#FF870C</color>
+    <color name="colorAnswerPress">#E2DBD4</color>
+
+    <color name="colorLastGame">#D40070</color>
+
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorWin">#0A988E</color>
+    <color name="colorLose">#000000</color>
+
+    <color name="colorTTTWin">#EB83BA</color>
+
+    <color name="colorBlack">#000000</color>
+</resources>

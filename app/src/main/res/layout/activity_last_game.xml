@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_last_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorLastGame"
+    tools:context="com.group25.proj2.LastGameActivity">
+
+    <TextView
+        android:id="@+id/lastGameMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+
+        android:text="@string/lastGameText"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/title_size"/>
+
+
+    <LinearLayout
+        android:id="@+id/lastGameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/tttButton"
+                android:background="@drawable/tttbutton"
+                android:layout_width="150dip"
+                android:layout_height="150dip"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/ticTacToeButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tttButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/buttonText_margin_top"
+                android:text="@string/tttButtonText"
+                android:textSize="@dimen/buttonText_size"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageButton
+                android:id="@+id/clarifaiButton"
+                android:background="@drawable/clarifaibutton"
+                android:layout_width="150dip"
+                android:layout_height="150dip"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/clarifaiButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/clarifaiButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/buttonText_margin_top"
+                android:text="@string/clarifaiButtonTest"
+                android:textSize="@dimen/buttonText_size"
+                android:textColor="@color/colorText"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
