@@ -10,14 +10,25 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class QuestionsActivity extends AppCompatActivity {
     private GestureDetector gestureDetector;
+    private String correctAnswer = "B";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
+
+        drawQuestion("What is 1 + 1?");
+        drawAnswer((TextView) findViewById(R.id.aText), "A", "1");
+        drawAnswer((TextView) findViewById(R.id.bText), "B", "2");
+        drawAnswer((TextView) findViewById(R.id.cText), "C", "3");
+        drawAnswer((TextView) findViewById(R.id.dText), "D", "4");
 
         Button nextButton = (Button) findViewById(R.id.questionsNextButton);
         nextButton.setOnClickListener(new View.OnClickListener(){
@@ -64,9 +75,18 @@ public class QuestionsActivity extends AppCompatActivity {
         });
     }
 
+    private void drawQuestion(String question){
+        TextView questionView = (TextView) findViewById(R.id.questionText);
+        questionView.setText(question);
+    };
+
+    private void drawAnswer(TextView answerView, String choice, String answer){
+        answerView.setText(choice + ". " + answer);
+    }
+
     private boolean answerButtonEventHandler(Button button, MotionEvent event, String command){
         if (gestureDetector.onTouchEvent(event)) {
-            BluetoothActivity.sendToDE2(BluetoothConstants.DCommand);
+            BluetoothActivity.sendToDE2(command);
             changeButtonColorOnUp(button);
             return true;
         }
