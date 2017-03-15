@@ -173,25 +173,22 @@
                 android:textColor="@color/colorQuestion"/>
 
             <ImageView
+                android:id="@+id/heart0"
+                android:layout_width="@dimen/questionText_size"
+                android:layout_height="@dimen/questionText_size"
+                android:layout_marginLeft="10dp" />
+
+            <ImageView
                 android:id="@+id/heart1"
                 android:layout_width="@dimen/questionText_size"
                 android:layout_height="@dimen/questionText_size"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/hearts"/>
+                android:layout_marginLeft="10dp" />
 
             <ImageView
                 android:id="@+id/heart2"
                 android:layout_width="@dimen/questionText_size"
                 android:layout_height="@dimen/questionText_size"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/hearts"/>
-
-            <ImageView
-                android:id="@+id/heart3"
-                android:layout_width="@dimen/questionText_size"
-                android:layout_height="@dimen/questionText_size"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/hearts_black"/>
+                android:layout_marginLeft="10dp" />
 
         </LinearLayout>
 

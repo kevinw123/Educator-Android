@@ -1,6 +1,8 @@
 package com.group25.proj2;
 
 import android.content.Intent;
+import android.graphics.Point;
+import android.media.Image;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +12,17 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 public class QuestionsActivity extends AppCompatActivity {
     private GestureDetector gestureDetector;
-    private String correctAnswer = "B";
+    private String correctChoice;
 
+    private int lives;
+    private ImageView livesViews[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,9 @@ public class QuestionsActivity extends AppCompatActivity {
         drawAnswer((TextView) findViewById(R.id.bText), "B", "2");
         drawAnswer((TextView) findViewById(R.id.cText), "C", "3");
         drawAnswer((TextView) findViewById(R.id.dText), "D", "4");
+        setCorrectAnswer("B");
+
+        initLives();
 
         Button nextButton = (Button) findViewById(R.id.questionsNextButton);
         nextButton.setOnClickListener(new View.OnClickListener(){
@@ -46,7 +54,7 @@ public class QuestionsActivity extends AppCompatActivity {
         aButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(aButton, event, BluetoothConstants.ACommand);
+                return answerButtonEventHandler(aButton, event, BluetoothConstants.ACommand, "A");
             }
         });
 
@@ -54,7 +62,7 @@ public class QuestionsActivity extends AppCompatActivity {
         bButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(bButton, event, BluetoothConstants.BCommand);
+                return answerButtonEventHandler(bButton, event, BluetoothConstants.BCommand, "B");
             }
         });
 
@@ -62,7 +70,7 @@ public class QuestionsActivity extends AppCompatActivity {
         cButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(cButton, event, BluetoothConstants.CCommand);
+                return answerButtonEventHandler(cButton, event, BluetoothConstants.CCommand, "C");
             }
         });
 
@@ -70,7 +78,7 @@ public class QuestionsActivity extends AppCompatActivity {
         dButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(dButton, event, BluetoothConstants.DCommand);
+                return answerButtonEventHandler(dButton, event, BluetoothConstants.DCommand, "D");
             }
         });
     }
@@ -84,10 +92,51 @@ public class QuestionsActivity extends AppCompatActivity {
         answerView.setText(choice + ". " + answer);
     }
 
-    private boolean answerButtonEventHandler(Button button, MotionEvent event, String command){
+    private void initLives(){
+        lives = 3;
+        livesViews = new ImageView[3];
+        livesViews[0] = (ImageView) findViewById(R.id.heart0);
+        livesViews[1] = (ImageView) findViewById(R.id.heart1);
+        livesViews[2] = (ImageView) findViewById(R.id.heart2);
+        for (int i = 0; i < 3; i++){
+            livesViews[i].setImageResource(R.mipmap.hearts);
+        }
+    }
+
+    private void setCorrectAnswer(String correctChoice){
+        this.correctChoice = correctChoice;
+    }
+
+    private void right(){
+        Intent intent = new Intent(QuestionsActivity.this, StoryActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
+
+    private void wrong(){
+        lives--;
+        livesViews[lives].setImageResource(R.mipmap.hearts_black);
+        if (lives == 0){
+            DoneActivity.setWon(false);
+            Intent intent = new Intent(QuestionsActivity.this, DoneActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        }
+    }
+
+    private void checkChoice(String choice){
+        if (choice.equals(correctChoice)){
+            right();
+        } else {
+            wrong();
+        }
+    }
+
+    private boolean answerButtonEventHandler(Button button, MotionEvent event, String command, String choice){
         if (gestureDetector.onTouchEvent(event)) {
             BluetoothActivity.sendToDE2(command);
             changeButtonColorOnUp(button);
+            checkChoice(choice);
             return true;
         }
 
