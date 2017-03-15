@@ -11,6 +11,15 @@
     android:background="@color/colorMovement"
     tools:context="com.group25.proj2.MovementActivity">
 
+    <Button
+        android:id="@+id/movementNextButton"
+        android:background="@color/colorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="NEXT"
+        android:textColor="@color/colorMovement" />
+
     <RelativeLayout
         android:id="@+id/movementButtons"
         android:layout_width="match_parent"

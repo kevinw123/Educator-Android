@@ -19,14 +19,23 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
+        Button nextButton = (Button) findViewById(R.id.questionsNextButton);
+        nextButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(QuestionsActivity.this, LastGameActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        });
+
+
         gestureDetector = new GestureDetector(this, new SingleTapUp());
 
         final Button aButton = (Button) findViewById(R.id.aButton);
         aButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                boolean toHandle = answerButtonTouchHandler(aButton, event);
-                return toHandle;
+                return answerButtonEventHandler(aButton, event, BluetoothConstants.ACommand);
             }
         });
 
@@ -34,8 +43,7 @@ public class QuestionsActivity extends AppCompatActivity {
         bButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                boolean toHandle = answerButtonTouchHandler(bButton, event);
-                return toHandle;
+                return answerButtonEventHandler(bButton, event, BluetoothConstants.BCommand);
             }
         });
 
@@ -43,8 +51,7 @@ public class QuestionsActivity extends AppCompatActivity {
         cButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                boolean toHandle = answerButtonTouchHandler(cButton, event);
-                return toHandle;
+                return answerButtonEventHandler(cButton, event, BluetoothConstants.CCommand);
             }
         });
 
@@ -52,26 +59,24 @@ public class QuestionsActivity extends AppCompatActivity {
         dButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                boolean toHandle = answerButtonTouchHandler(dButton, event);
-                return toHandle;
+                return answerButtonEventHandler(dButton, event, BluetoothConstants.DCommand);
             }
         });
     }
 
-    private boolean answerButtonTouchHandler(Button button, MotionEvent event){
-
+    private boolean answerButtonEventHandler(Button button, MotionEvent event, String command){
         if (gestureDetector.onTouchEvent(event)) {
+            BluetoothActivity.sendToDE2(BluetoothConstants.DCommand);
             changeButtonColorOnUp(button);
-
-            // TODO: Send UP flag over Bluetooth
-
-            // For testing
-            Intent intent = new Intent(this, LastGameActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
             return true;
-        } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        }
+
+        return answerButtonTouchHandler(button, event);
+
+    }
+
+    private boolean answerButtonTouchHandler(Button button, MotionEvent event){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             changeButtonColorOnDown(button);
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {

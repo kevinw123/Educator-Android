@@ -11,6 +11,8 @@
     android:background="@color/colorStory"
     tools:context="com.group25.proj2.StoryActivity">
 
+
+
     <ImageButton
         android:id="@+id/storyScrollButton"
         android:background="@drawable/storybutton"

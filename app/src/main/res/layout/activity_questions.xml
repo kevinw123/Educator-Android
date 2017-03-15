@@ -11,6 +11,17 @@
     android:background="@color/colorQuestion"
     tools:context="com.group25.proj2.QuestionsActivity">
 
+    <Button
+        android:id="@+id/questionsNextButton"
+        android:background="@color/colorQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentRight="true"
+        android:text="NEXT"
+        android:textColor="@color/colorText" />
+
     <RelativeLayout
         android:id="@+id/questionLayout"
         android:background="@color/colorText"
