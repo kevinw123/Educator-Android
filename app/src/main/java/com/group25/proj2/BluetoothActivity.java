@@ -66,7 +66,7 @@ public class BluetoothActivity extends AppCompatActivity {
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
 
-        /*Set<BluetoothDevice> thePairedDevices = mBluetoothAdapter.getBondedDevices();
+        Set<BluetoothDevice> thePairedDevices = mBluetoothAdapter.getBondedDevices();
         if (thePairedDevices.size() > 0) {
             Iterator<BluetoothDevice> iter = thePairedDevices.iterator();
             BluetoothDevice aNewdevice;
@@ -75,11 +75,9 @@ public class BluetoothActivity extends AppCompatActivity {
                 CreateSerialBluetoothDeviceSocket(aNewdevice);
                 ConnectToSerialBlueToothDevice();
                 WriteToBTDevice("hello$");
-                //String s = ReadFromBTDevice();
-                //System.out.println(s);
                 System.out.println("End");
             }
-        }*/
+        }
         Intent intent = new Intent(BluetoothActivity.this, MenuActivity.class);
         startActivity(intent);
     }
@@ -165,35 +163,13 @@ public class BluetoothActivity extends AppCompatActivity {
     }
 
     public static void sendToDE2(String s){
-        Set<BluetoothDevice> thePairedDevices = mBluetoothAdapter.getBondedDevices();
-        if (thePairedDevices.size() > 0) {
-            Iterator<BluetoothDevice> iter = thePairedDevices.iterator();
-            BluetoothDevice aNewdevice;
-            while (iter.hasNext()) { // while at least one more device
-                aNewdevice = iter.next();
-                CreateSerialBluetoothDeviceSocket(aNewdevice);
-                ConnectToSerialBlueToothDevice();
-                WriteToBTDevice(s);
-                //String s = ReadFromBTDevice();
-                //System.out.println(s);
-                System.out.println("End");
-            }
-        }
+        WriteToBTDevice(s);
+        System.out.println(s);
     }
 
     public static String readFromDE2(){
-        Set<BluetoothDevice> thePairedDevices = mBluetoothAdapter.getBondedDevices();
         String s = "";
-        if (thePairedDevices.size() > 0) {
-            Iterator<BluetoothDevice> iter = thePairedDevices.iterator();
-            BluetoothDevice aNewdevice;
-            while (iter.hasNext()) { // while at least one more device
-                aNewdevice = iter.next();
-                CreateSerialBluetoothDeviceSocket(aNewdevice);
-                ConnectToSerialBlueToothDevice();
-                s = ReadFromBTDevice();
-            }
-        }
+        s = ReadFromBTDevice();
         return s;
     }
 }
