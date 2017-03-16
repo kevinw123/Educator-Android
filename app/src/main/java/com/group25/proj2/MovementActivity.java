@@ -26,33 +26,46 @@ public class MovementActivity extends AppCompatActivity {
         ImageButton upButton = (ImageButton) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // TODO: Send UP flag over Bluetooth
-                BluetoothActivity.sendToDE2(BluetoothConstants.upCommand);
+                move(BluetoothConstants.upCommand);
+
             }
         });
 
         ImageButton downButton = (ImageButton) findViewById(R.id.downButton);
         downButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // TODO: Send DOWN flag over Bluetooth
-                BluetoothActivity.sendToDE2(BluetoothConstants.downCommand);
+                move(BluetoothConstants.downCommand);
             }
         });
 
         ImageButton leftButton = (ImageButton) findViewById(R.id.leftButton);
         leftButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // TODO: Send LEFT flag over Bluetooth
-                BluetoothActivity.sendToDE2(BluetoothConstants.leftCommand);
+                move(BluetoothConstants.leftCommand);
             }
         });
 
         ImageButton rightButton = (ImageButton) findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // TODO: Send RIGHT flag over Bluetooth
-                BluetoothActivity.sendToDE2(BluetoothConstants.rightCommand);
+                move(BluetoothConstants.rightCommand);
             }
         });
     }
+
+    private void checkEnemy(){
+        String command = BluetoothActivity.readFromDE2();
+        System.out.println(command);
+        if (command.equals(BluetoothConstants.QUESTION_DE2)) {
+            Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        }
+    }
+
+    private void move(String direction){
+        BluetoothActivity.sendToDE2(direction);
+        checkEnemy();
+    }
+
 }

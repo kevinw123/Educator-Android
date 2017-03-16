@@ -32,7 +32,7 @@ public class DoneActivity extends AppCompatActivity {
         ImageButton replayButton = (ImageButton) findViewById(R.id.replayButton);
         replayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // TODO: Send PLAY flag over Bluetooth
+                BluetoothActivity.sendToDE2(BluetoothConstants.startCommand);
                 Intent intent = new Intent(DoneActivity.this, StoryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);

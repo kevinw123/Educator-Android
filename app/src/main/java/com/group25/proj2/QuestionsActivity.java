@@ -29,13 +29,7 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        drawQuestion("What is 1 + 1?");
-        drawAnswer((TextView) findViewById(R.id.aText), "A", "1");
-        drawAnswer((TextView) findViewById(R.id.bText), "B", "2");
-        drawAnswer((TextView) findViewById(R.id.cText), "C", "3");
-        drawAnswer((TextView) findViewById(R.id.dText), "D", "4");
-        setCorrectAnswer("B");
-
+        //BluetoothActivity.sendToDE2(BluetoothConstants.questionCommand);
         initLives();
 
         Button nextButton = (Button) findViewById(R.id.questionsNextButton);
@@ -81,6 +75,11 @@ public class QuestionsActivity extends AppCompatActivity {
                 return answerButtonEventHandler(dButton, event, BluetoothConstants.DCommand, "D");
             }
         });
+        /*while (BluetoothActivity.readFromDE2() != "$") {
+            System.out.println("waiting for de2");
+            continue;
+        }*/
+        getQuestionFromDE2();
     }
 
     private void drawQuestion(String question){
@@ -90,6 +89,26 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private void drawAnswer(TextView answerView, String choice, String answer){
         answerView.setText(choice + ". " + answer);
+    }
+
+    private void getQuestionFromDE2(){
+        /*String questionString = BluetoothActivity.readFromDE2();
+        System.out.println(questionString);
+        String[] questionArray = questionString.split(",");
+
+        drawQuestion(questionArray[0]);
+        drawAnswer((TextView) findViewById(R.id.aText), "A", questionArray[1]);
+        drawAnswer((TextView) findViewById(R.id.bText), "B", questionArray[2]);
+        drawAnswer((TextView) findViewById(R.id.cText), "C", questionArray[3]);
+        drawAnswer((TextView) findViewById(R.id.dText), "D", questionArray[4]);
+        setCorrectAnswer(questionArray[5]); */
+
+        drawQuestion("What is 1 + 1?");
+        drawAnswer((TextView) findViewById(R.id.aText), "A", "1");
+        drawAnswer((TextView) findViewById(R.id.bText), "B", "2");
+        drawAnswer((TextView) findViewById(R.id.cText), "C", "3");
+        drawAnswer((TextView) findViewById(R.id.dText), "D", "4");
+        setCorrectAnswer("B");
     }
 
     private void initLives(){
@@ -134,7 +153,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private boolean answerButtonEventHandler(Button button, MotionEvent event, String command, String choice){
         if (gestureDetector.onTouchEvent(event)) {
-            BluetoothActivity.sendToDE2(command);
+            //BluetoothActivity.sendToDE2(command);
             changeButtonColorOnUp(button);
             checkChoice(choice);
             return true;
@@ -171,4 +190,6 @@ public class QuestionsActivity extends AppCompatActivity {
             b.setBackgroundColor(getResources().getColor(R.color.colorText));
         }
     }
+
+
 }
