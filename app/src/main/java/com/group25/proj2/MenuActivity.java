@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 import java.util.Iterator;
 import java.util.Set;
 
+import static com.group25.proj2.BluetoothConstants.startCommand;
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -22,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
         menuPlayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 // TODO: Send PLAY flag over Bluetooth
+                BluetoothActivity.sendToDE2(startCommand);
                 Intent intent = new Intent(MenuActivity.this, StoryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
