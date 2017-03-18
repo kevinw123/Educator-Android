@@ -52,6 +52,10 @@ public class TicTacToeActivity extends AppCompatActivity {
         playerTurn = true;
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private boolean buttonIsEmpty(String[] board, int i){
         return board[i].equals("");
     }

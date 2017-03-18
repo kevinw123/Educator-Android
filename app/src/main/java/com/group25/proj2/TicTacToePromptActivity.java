@@ -41,6 +41,10 @@ public class TicTacToePromptActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     protected void launchTicTacToeGame(){
         Intent intent = new Intent(this, TicTacToeActivity.class);
         startActivity(intent);

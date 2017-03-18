@@ -82,6 +82,10 @@ public class QuestionsActivity extends AppCompatActivity {
         getQuestionFromDE2();
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private void drawQuestion(String question){
         TextView questionView = (TextView) findViewById(R.id.questionText);
         questionView.setText(question);

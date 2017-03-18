@@ -91,6 +91,10 @@ public class FractionsActivity extends AppCompatActivity {
         initGame();
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private void launchGameOverScreen(){
         Intent intent = new Intent(this, DoneActivity.class);
         startActivity(intent);

@@ -53,6 +53,10 @@ public class MovementActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private void checkEnemy(){
         String command = BluetoothActivity.readFromDE2();
         System.out.println(command);

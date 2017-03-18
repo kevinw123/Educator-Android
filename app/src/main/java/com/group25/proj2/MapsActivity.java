@@ -61,6 +61,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setFlagImage();
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public void setFlagImage(){
         int i =  getRandomNumber();
         flagImage.setImageResource(flagArray[i]);

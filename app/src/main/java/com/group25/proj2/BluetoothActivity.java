@@ -87,6 +87,10 @@ public class BluetoothActivity extends AppCompatActivity {
         unregisterReceiver(mReceiver); // make sure we unregister
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public static void CreateSerialBluetoothDeviceSocket(BluetoothDevice device) {
         mmSocket = null;
 
