@@ -26,60 +26,134 @@
     <LinearLayout
         android:id="@+id/lastGameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastGameMessage"
+        android:orientation="vertical"
+        android:weightSum="2">
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2" >
 
-            <ImageButton
-                android:id="@+id/tttButton"
-                android:background="@drawable/tttbutton"
-                android:layout_width="150dip"
-                android:layout_height="150dip"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
-
-            <TextView
-                android:id="@+id/ticTacToeButtonText"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_below="@id/tttButton"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/buttonText_margin_top"
-                android:text="@string/tttButtonText"
-                android:textSize="@dimen/buttonText_size"
-                android:textAlignment="center"
-                android:textColor="@color/colorText"/>
+                android:layout_weight="1">
 
-        </RelativeLayout>
+                <ImageButton
+                    android:id="@+id/tttButton"
+                    android:background="@drawable/tttbutton"
+                    android:layout_width="@dimen/lastGameButton_size"
+                    android:layout_height="@dimen/lastGameButton_size"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
+                <TextView
+                    android:id="@+id/ticTacToeButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tttButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/buttonText_margin_top"
+                    android:text="@string/tttButtonText"
+                    android:textSize="@dimen/lastGameButtonText_size"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"/>
 
-            <ImageButton
-                android:id="@+id/clarifaiButton"
-                android:background="@drawable/clarifaibutton"
-                android:layout_width="150dip"
-                android:layout_height="150dip"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/clarifaiButtonText"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_below="@id/clarifaiButton"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/buttonText_margin_top"
-                android:text="@string/clarifaiButtonTest"
-                android:textSize="@dimen/buttonText_size"
-                android:textColor="@color/colorText"/>
+                android:layout_weight="1" >
 
-        </RelativeLayout>
+                <ImageButton
+                    android:id="@+id/clarifaiButton"
+                    android:background="@drawable/clarifaibutton"
+                    android:layout_width="@dimen/lastGameButton_size"
+                    android:layout_height="@dimen/lastGameButton_size"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/clarifaiButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/clarifaiButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/buttonText_margin_top"
+                    android:text="@string/clarifaiButtonTest"
+                    android:textSize="@dimen/lastGameButtonText_size"
+                    android:textColor="@color/colorText"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/flagsButton"
+                    android:background="@drawable/tttbutton"
+                    android:layout_width="@dimen/lastGameButton_size"
+                    android:layout_height="@dimen/lastGameButton_size"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/flagsButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/flagsButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/buttonText_margin_top"
+                    android:text="@string/flagsText"
+                    android:textSize="@dimen/lastGameButtonText_size"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <ImageButton
+                    android:id="@+id/fractionsButton"
+                    android:background="@drawable/fractionsbutton"
+                    android:layout_width="@dimen/lastGameButton_size"
+                    android:layout_height="@dimen/lastGameButton_size"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/fractionsButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/fractionsButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/buttonText_margin_top"
+                    android:text="@string/fractionsText"
+                    android:textSize="@dimen/lastGameButtonText_size"
+                    android:textColor="@color/colorText"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

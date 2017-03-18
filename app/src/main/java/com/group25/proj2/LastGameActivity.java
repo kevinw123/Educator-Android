@@ -35,5 +35,15 @@ public class LastGameActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
+
+        ImageButton fractionsButton = (ImageButton) findViewById(R.id.fractionsButton);
+        fractionsButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                Intent intent = new Intent(LastGameActivity.this, FractionsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        });
     }
 }
