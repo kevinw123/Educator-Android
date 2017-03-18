@@ -17,4 +17,5 @@
     <string name="lastGameText">LAST GAME</string>
     <string name="tttButtonText">TIC TAC TOE</string>
     <string name="clarifaiButtonTest">CLARIFAI</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
