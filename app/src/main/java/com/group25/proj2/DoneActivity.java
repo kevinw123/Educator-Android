@@ -1,10 +1,12 @@
 package com.group25.proj2;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -18,6 +20,7 @@ public class DoneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_done);
+        setBackgroundColor();
 
         TextView doneMessage = (TextView) findViewById(R.id.doneMessage);
         if (won){
@@ -48,6 +51,23 @@ public class DoneActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
+    }
+
+    private void setBackgroundColor(){
+        RelativeLayout thisView = (RelativeLayout) findViewById(R.id.activity_done);
+        if (won){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                thisView.setBackgroundColor(getResources().getColor(R.color.colorWin, getTheme()));
+            }else {
+                thisView.setBackgroundColor(getResources().getColor(R.color.colorWin));
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                thisView.setBackgroundColor(getResources().getColor(R.color.colorLose, getTheme()));
+            }else {
+                thisView.setBackgroundColor(getResources().getColor(R.color.colorLose));
+            }
+        }
     }
 
     public static void setWon(boolean gameWon){

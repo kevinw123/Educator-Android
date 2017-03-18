@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_fractions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorText"
+    tools:context="com.group25.proj2.FractionsActivity">
+
+    <TextView
+        android:id="@+id/fractionsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="SWIPE TO THE LARGER FRACTION"
+        android:textSize="@dimen/answerText_size"
+        android:textColor="@color/colorLastGame"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/timeLeft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fractionsTitle"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="10 SECONDS LEFT"
+        android:textColor="@color/colorLastGame"
+        android:textSize="@dimen/questionText_size"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:id="@+id/fractionsArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/timeLeft"
+        android:layout_above="@+id/swipeArea"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <RelativeLayout
+            android:id="@+id/leftFraction"
+            android:background="@color/colorLastGame"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin" >
+            
+            <TextView
+                android:id="@+id/numeratorLeft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/fractionLeftBorder"
+                android:padding="10sp"
+                android:textSize="@dimen/fraction_size"
+                android:textColor="@color/colorText"
+                android:textAlignment="center" />
+
+            <View
+                android:id="@+id/fractionLeftBorder"
+                android:background="@color/colorText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fraction_border"
+                android:layout_margin="10dp"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/demoninatorLeft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fractionLeftBorder"
+                android:padding="10sp"
+                android:textSize="@dimen/fraction_size"
+                android:textColor="@color/colorText"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rightFraction"
+            android:background="@color/colorLastGame"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/numeratorRight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/fractionRightBorder"
+                android:padding="10sp"
+                android:textSize="@dimen/fraction_size"
+                android:textColor="@color/colorText"
+                android:textAlignment="center" />
+
+            <View
+                android:id="@+id/fractionRightBorder"
+                android:background="@color/colorText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fraction_border"
+                android:layout_margin="10dp"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/denominatorRight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fractionRightBorder"
+                android:padding="10sp"
+                android:textSize="@dimen/fraction_size"
+                android:textColor="@color/colorText"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/swipeArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <ImageButton
+            android:id="@+id/swipeButton"
+            android:background="@color/colorLastGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_vertical_margin"
+            android:src="@mipmap/finger_swipe"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -11,10 +11,10 @@
     <color name="colorQuestion">#FF870C</color>
     <color name="colorAnswerPress">#E2DBD4</color>
 
-    <color name="colorLastGame">#D40070</color>
+    <color name="colorWin">#D40070</color>
 
     <color name="colorText">#FFFFFF</color>
-    <color name="colorWin">#0A988E</color>
+    <color name="colorLastGame">#0A988E</color>
     <color name="colorLose">#000000</color>
 
     <color name="colorTTTWin">#EB83BA</color>
