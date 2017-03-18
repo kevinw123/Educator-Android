@@ -107,7 +107,7 @@
 
                 <ImageButton
                     android:id="@+id/flagsButton"
-                    android:background="@drawable/tttbutton"
+                    android:background="@drawable/flaggamebutton"
                     android:layout_width="@dimen/lastGameButton_size"
                     android:layout_height="@dimen/lastGameButton_size"
                     android:layout_centerHorizontal="true"

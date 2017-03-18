@@ -1,5 +1,6 @@
 package com.group25.proj2;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.nfc.Tag;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import static com.group25.proj2.DoneActivity.setWon;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -69,6 +72,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return randomNum;
     }
 
+    private void lose(){
+        setWon(false);
+        launchGameOverScreen();
+    }
+
+    private void launchGameOverScreen(){
+        Intent intent = new Intent(this, DoneActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -109,20 +122,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String selectionCountry = addresses.get(0).getCountryName();
                     if(selectionCountry.equals(countryName[randomNum])){
                         numOfCorrect++;
-                        Toast.makeText(getApplicationContext(), "Correct! you picked " + selectionCountry,
-                                Toast.LENGTH_LONG).show();
+                        if(numOfCorrect < 3) {
+                            Toast.makeText(getApplicationContext(), "Correct! You picked " + selectionCountry + ". Number of correct answers: " + Integer.toString(numOfCorrect),
+                                    Toast.LENGTH_LONG).show();
+                        }
                         if(numOfCorrect == 3){
-                            // Go to win screen
-                            System.out.println("You win!");
+                            setWon(true);
+                            launchGameOverScreen();
                         }
                         setFlagImage();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Incorrect! you picked " + selectionCountry,
-                                Toast.LENGTH_LONG).show();
                         numOfLives--;
+                        if(numOfLives > 0) {
+                            Toast.makeText(getApplicationContext(), "Incorrect! You picked " + selectionCountry + ". Number of lives left: " + Integer.toString(numOfLives),
+                                    Toast.LENGTH_LONG).show();
+                        }
                         if(numOfLives == 0){
-                            // Go to Lose screen
-                            System.out.println("You lose!");
+                            lose();
                         }
                     }
                 }

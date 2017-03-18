@@ -45,5 +45,15 @@ public class LastGameActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
+
+        ImageButton flagGameButton = (ImageButton) findViewById(R.id.flagsButton);
+        flagGameButton.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+
+                Intent intent = new Intent(LastGameActivity.this, MapsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        });
     }
 }
