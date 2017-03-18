@@ -17,7 +17,7 @@
     <color name="colorLastGame">#0A988E</color>
     <color name="colorLose">#000000</color>
 
-    <color name="colorTTTWin">#EB83BA</color>
+    <color name="colorHighlightWin">#62C5A0</color>
 
     <color name="colorBlack">#000000</color>
 </resources>

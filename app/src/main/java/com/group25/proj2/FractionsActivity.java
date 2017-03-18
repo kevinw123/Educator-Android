@@ -1,6 +1,7 @@
 package com.group25.proj2;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,9 @@ import static com.group25.proj2.DoneActivity.setWon;
 
 public class FractionsActivity extends AppCompatActivity {
     private ImageButton swipeButton;
+
+    private RelativeLayout fractionLeftView;
+    private RelativeLayout fractionRightView;
 
     private TextView numeratorLeftView;
     private TextView numeratorRightView;
@@ -54,6 +58,9 @@ public class FractionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fractions);
+
+        fractionLeftView = (RelativeLayout) findViewById(R.id.leftFraction);
+        fractionRightView = (RelativeLayout) findViewById(R.id.rightFraction);
 
         numeratorLeftView = (TextView) findViewById(R.id.numeratorLeft);
         numeratorRightView = (TextView) findViewById(R.id.numeratorRight);
@@ -101,10 +108,25 @@ public class FractionsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
-    private void win(){
-        roundsLeft--;
+    private void highlightWin(){
+        if (correctDirection == LEFT) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                fractionLeftView.setBackgroundColor(getResources().getColor(R.color.colorHighlightWin, getTheme()));
+            } else {
+                fractionLeftView.setBackgroundColor(getResources().getColor(R.color.colorHighlightWin));
+            }
+        } else {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                fractionRightView.setBackgroundColor(getResources().getColor(R.color.colorHighlightWin, getTheme()));
+            } else {
+                fractionRightView.setBackgroundColor(getResources().getColor(R.color.colorHighlightWin));
+            }
+        }
+    }
+
+    private void checkGameOver(){
         if (roundsLeft > 0) {
-            Toast.makeText(getApplicationContext(), "Correct. " + roundsLeft + " more round(s)!", Toast.LENGTH_LONG).show();
             startGame();
         } else {
             setWon(true);
@@ -112,10 +134,43 @@ public class FractionsActivity extends AppCompatActivity {
         }
     }
 
+    private void win(){
+        highlightWin();
+
+        roundsLeft--;
+        if (roundsLeft > 0){
+            Toast.makeText(getApplicationContext(), "Correct. " + roundsLeft + " more round(s)!", Toast.LENGTH_LONG).show();
+        }
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask(){
+            @Override
+            public void run(){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkGameOver();
+                    }
+                });
+            }
+        }, LastGameActivity.GAMEOVERDELAY);
+    }
+
     private void lose(String loseMessage){
         Toast.makeText(getApplicationContext(), loseMessage, Toast.LENGTH_LONG).show();
-        setWon(false);
-        launchGameOverScreen();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask(){
+            @Override
+            public void run(){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setWon(false);
+                        launchGameOverScreen();
+                    }
+                });
+            }
+        }, LastGameActivity.GAMEOVERDELAY);
     }
 
     private void checkDirection(int direction){
@@ -138,7 +193,23 @@ public class FractionsActivity extends AppCompatActivity {
         denominatorRight = getRandomNum();
     }
 
+    private void initFractionBackgrounds(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            fractionLeftView.setBackgroundColor(getResources().getColor(R.color.colorLastGame, getTheme()));
+        }else {
+            fractionLeftView.setBackgroundColor(getResources().getColor(R.color.colorLastGame));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            fractionRightView.setBackgroundColor(getResources().getColor(R.color.colorLastGame, getTheme()));
+        }else {
+            fractionRightView.setBackgroundColor(getResources().getColor(R.color.colorLastGame));
+        }
+    }
+
     private void drawFractions(){
+        initFractionBackgrounds();
+
         setFractions();
         numeratorLeftView.setText(Integer.toString((int)numeratorLeft));
         numeratorRightView.setText(Integer.toString((int)numeratorRight));
@@ -157,7 +228,6 @@ public class FractionsActivity extends AppCompatActivity {
         } else {
             correctDirection = EITHER;
         }
-        System.out.println(correctDirection);
     }
 
     private void updateTime(){

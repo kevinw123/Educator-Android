@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class LastGameActivity extends AppCompatActivity {
+    public static final int GAMEOVERDELAY = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -38,7 +38,6 @@ public class TicTacToeActivity extends AppCompatActivity {
     private int winCombo[];
     private int successCount;
     private TextView gameInfoView;
-    private int gameOverDelay = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,9 +161,9 @@ public class TicTacToeActivity extends AppCompatActivity {
             int winIndex = winCombo[i];
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                tttButtons[winIndex].setBackgroundColor(getResources().getColor(R.color.colorTTTWin, getTheme()));
+                tttButtons[winIndex].setBackgroundColor(getResources().getColor(R.color.colorHighlightWin, getTheme()));
             }else {
-                tttButtons[winIndex].setBackgroundColor(getResources().getColor(R.color.colorTTTWin));
+                tttButtons[winIndex].setBackgroundColor(getResources().getColor(R.color.colorHighlightWin));
             }
         }
     }
@@ -201,7 +200,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                         }
                     });
                 }
-            }, gameOverDelay);
+            }, LastGameActivity.GAMEOVERDELAY);
         }
     }
 
@@ -220,7 +219,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, gameOverDelay);
+        }, LastGameActivity.GAMEOVERDELAY);
     }
 
     private void tie(){
@@ -238,7 +237,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, gameOverDelay);
+        }, LastGameActivity.GAMEOVERDELAY);
     }
 
     private ArrayList<Integer> getIntArray(ArrayList<String> stringArray){
