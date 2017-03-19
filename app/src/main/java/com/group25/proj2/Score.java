@@ -10,6 +10,9 @@ public class Score {
     public static int score;
     public static int highscore;
 
+    public static final String PREF = "SHARED_PREF";
+    public static final String HIGHSCORE_PREF = "HIGHSCORE";
+
     public static void resetScore(){
         score = 0;
     }

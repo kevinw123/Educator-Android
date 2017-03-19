@@ -1,6 +1,8 @@
 package com.group25.proj2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +17,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        highscoreView = (TextView) findViewById(R.id.highscoreMenu);
-        Score.drawHighscore(highscoreView);
+        initHighscore();
 
         ImageButton menuPlayButton = (ImageButton) findViewById(R.id.menuPlayButton);
         menuPlayButton.setOnClickListener(new View.OnClickListener(){
@@ -35,6 +36,14 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    private void initHighscore(){
+        SharedPreferences settings = getSharedPreferences(Score.PREF, Context.MODE_PRIVATE);
+        Score.highscore = settings.getInt(Score.HIGHSCORE_PREF, 0);
+
+        highscoreView = (TextView) findViewById(R.id.highscoreMenu);
+        Score.drawHighscore(highscoreView);
     }
 
 

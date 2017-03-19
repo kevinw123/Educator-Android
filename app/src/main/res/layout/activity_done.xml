@@ -99,11 +99,24 @@
             android:id="@+id/highscoreDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/resetHighscoreButton"
             android:text="HIGHSCORE: 0"
             android:textSize="@dimen/lastGameScore_size"
             android:textColor="@color/colorText"
             android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/resetHighscoreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/buttonText_margin_top"
+            android:padding="@dimen/activity_vertical_margin"
+            android:text="RESET HIGHSCORE"
+            android:textSize="10sp"
+            android:background="@color/colorText"
+            android:textColor="@color/colorWin" />
 
     </RelativeLayout>
 

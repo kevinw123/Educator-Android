@@ -1,10 +1,13 @@
 package com.group25.proj2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,12 +20,14 @@ public class DoneActivity extends AppCompatActivity {
     public static boolean won;
     private TextView scoreView;
     private TextView highscoreView;
+    private Button resetHighscoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_done);
-        setBackgroundColor();
+
+        saveHighscore();
 
         scoreView = (TextView) findViewById(R.id.scoreDone);
         highscoreView = (TextView) findViewById(R.id.highscoreDone);
@@ -60,20 +65,33 @@ public class DoneActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
+
+        resetHighscoreButton = (Button) findViewById(R.id.resetHighscoreButton);
+        resetHighscoreButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                resetHighscoreView();
+                resetSavedHighscore();
+            }
+        });
+
+        setColors();
     }
 
-    private void setBackgroundColor(){
+    private void setColors(){
         RelativeLayout thisView = (RelativeLayout) findViewById(R.id.activity_done);
         if (won){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorWin, getTheme()));
+                resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
             }else {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorWin));
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorLose, getTheme()));
+                resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorLose, getTheme()));
             }else {
+                thisView.setBackgroundColor(getResources().getColor(R.color.colorLose));
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorLose));
             }
         }
@@ -85,6 +103,28 @@ public class DoneActivity extends AppCompatActivity {
         } else {
             won = false;
         }
+    }
 
+    private void saveHighscore(){
+        SharedPreferences settings = getSharedPreferences(Score.PREF, Context.MODE_PRIVATE);
+        int savedHighscore = settings.getInt(Score.HIGHSCORE_PREF, 0);
+
+        if (Score.highscore > savedHighscore){
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt(Score.HIGHSCORE_PREF, Score.highscore);
+            editor.commit();
+        }
+    }
+
+    private void resetSavedHighscore(){
+        SharedPreferences settings = getSharedPreferences(Score.PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt(Score.HIGHSCORE_PREF, Score.highscore);
+        editor.commit();
+    }
+
+    private void resetHighscoreView(){
+        Score.highscore = 0;
+        Score.drawHighscore(highscoreView);
     }
 }

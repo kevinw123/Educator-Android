@@ -111,8 +111,8 @@ public class FractionsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
-    private void highlightWin(){
-        if (correctDirection == LEFT) {
+    private void highlightWin(int direction){
+        if (direction == LEFT) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 fractionLeftView.setBackgroundColor(getResources().getColor(R.color.colorHighlightWin, getTheme()));
             } else {
@@ -137,9 +137,9 @@ public class FractionsActivity extends AppCompatActivity {
         }
     }
 
-    private void win(){
+    private void win(int direction){
         roundTimer.cancel();
-        highlightWin();
+        highlightWin(direction);
         Score.updateScore(1, scoreView, highscoreView);
 
         roundsLeft--;
@@ -162,6 +162,7 @@ public class FractionsActivity extends AppCompatActivity {
     }
 
     private void lose(String loseMessage){
+        roundTimer.cancel();
         Toast.makeText(getApplicationContext(), loseMessage, Toast.LENGTH_LONG).show();
         Timer timer = new Timer();
         timer.schedule(new TimerTask(){
@@ -179,8 +180,10 @@ public class FractionsActivity extends AppCompatActivity {
     }
 
     private void checkDirection(int direction){
-        if (direction == correctDirection){
-            win();
+        if (correctDirection == EITHER){
+            win(direction);
+        } else if (direction == correctDirection){
+            win(direction);
         } else {
             lose("Incorrect. You lose!");
         }
