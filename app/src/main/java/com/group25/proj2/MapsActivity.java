@@ -37,6 +37,11 @@ import java.util.Random;
 import static com.group25.proj2.DoneActivity.setWon;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+    public static final String gameTitle = "FLAGS";
+    public static final String gameInstructions = "Examine the flag image. Pan and/or zoom the map, and click the flag's country!";
+    public static final String scoreInstructions = "For each correct country, you get 1 point.";
+    public static final String livesInstructions = "You have 3 lives. For each incorrect country, you lose 1 life. You must find 3 countries before your lives run out!";
+
     private TextView scoreView;
     private TextView highscoreView;
 

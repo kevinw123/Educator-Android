@@ -17,6 +17,11 @@ import static com.group25.proj2.DoneActivity.setWon;
 
 
 public class TicTacToeActivity extends AppCompatActivity {
+    public static final String gameTitle = "TIC TAC TOE";
+    public static final String gameInstructions = "Pick X or O. If you are X, the phone is O. Alternate with the phone to place your mark on a 3-by-3 board. The first player to get 3 in a row (vertically, horizontally, or diagonally) wins!";
+    public static final String scoreInstructions = "When you tie or win, you get 1 point.";
+    public static final String livesInstructions = "You must win or tie 3 times IN A ROW to win the game!";
+
     private TextView scoreView;
     private TextView highscoreView;
 

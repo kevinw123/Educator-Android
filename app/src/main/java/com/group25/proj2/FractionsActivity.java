@@ -19,6 +19,11 @@ import java.util.TimerTask;
 import static com.group25.proj2.DoneActivity.setWon;
 
 public class FractionsActivity extends AppCompatActivity {
+    public static final String gameTitle = "FRACTIONS";
+    public static final String gameInstructions = "Compare the left fraction and the right fraction. Swipe towards the larger fraction!";
+    public static final String scoreInstructions = "For each correct swipe, you get 1 point.";
+    public static final String livesInstructions = "You must swipe correctly 3 times IN A ROW to win the game!";
+
     private TextView scoreView;
     private TextView highscoreView;
 

@@ -19,6 +19,6 @@
     <string name="clarifaiButtonTest">CLARIFAI</string>
     <string name="title_activity_maps">Map</string>
 
-    <string name="flagsText">FLAG GAME</string>
+    <string name="flagsText">FLAGS</string>
     <string name="fractionsText">FRACTIONS</string>
 </resources>
