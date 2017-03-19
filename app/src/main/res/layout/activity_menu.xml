@@ -4,30 +4,45 @@
     android:id="@+id/activity_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/colorMenu"
-    tools:context="com.group25.proj2.MenuActivity">
-
-    <ImageButton
-        android:id="@+id/menuPlayButton"
-        android:background="@drawable/playbutton"
-        android:layout_width="150dip"
-        android:layout_height="150dip"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-
+    tools:context="com.group25.proj2.MenuActivity" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/highscoreMenu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/menuPlayButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/buttonText_margin_top"
-        android:text="@string/playButtonText"
-        android:textSize="@dimen/buttonText_size"
-        android:textColor="@color/colorText"/>
+        android:padding="@dimen/activity_vertical_margin"
+        android:background="@color/colorText"
+        android:text="HIGHSCORE: 0"
+        android:textColor="@color/colorMenu"
+        android:textAlignment="textEnd">
+    </TextView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <ImageButton
+            android:id="@+id/menuPlayButton"
+            android:layout_width="150dip"
+            android:layout_height="150dip"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/playbutton" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menuPlayButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/buttonText_margin_top"
+            android:text="@string/playButtonText"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/buttonText_size" />
+    </RelativeLayout>
 </RelativeLayout>

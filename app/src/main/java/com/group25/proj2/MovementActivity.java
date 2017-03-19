@@ -6,13 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MovementActivity extends AppCompatActivity {
+
+    private TextView scoreView;
+    private TextView highscoreView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movement);
+
+        scoreView = (TextView) findViewById(R.id.scoreMovement);
+        highscoreView = (TextView) findViewById(R.id.highscoreMovement);
+        Score.drawScores(scoreView, highscoreView);
 
         Button nextButton = (Button) findViewById(R.id.movementNextButton);
         nextButton.setOnClickListener(new View.OnClickListener(){

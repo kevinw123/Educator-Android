@@ -9,16 +9,26 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import static com.group25.proj2.TicTacToeActivity.setPlayerPiece;
 
 public class TicTacToePromptActivity extends AppCompatActivity {
+    private TextView scoreView;
+    private TextView highscoreView;
+
     private GestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tic_tac_toe_prompt);
+
+        scoreView = (TextView) findViewById(R.id.scoreTTTPrompt);
+        highscoreView = (TextView) findViewById(R.id.highscoreTTTPrompt);
+        Score.drawScores(scoreView, highscoreView);
 
         gestureDetector = new GestureDetector(this, new SingleTapUp());
 

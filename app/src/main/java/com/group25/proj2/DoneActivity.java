@@ -15,12 +15,18 @@ import static com.group25.proj2.TicTacToeActivity.won;
 
 public class DoneActivity extends AppCompatActivity {
     public static boolean won;
+    private TextView scoreView;
+    private TextView highscoreView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_done);
         setBackgroundColor();
+
+        scoreView = (TextView) findViewById(R.id.scoreDone);
+        highscoreView = (TextView) findViewById(R.id.highscoreDone);
+        Score.drawScores(scoreView, highscoreView);
 
         TextView doneMessage = (TextView) findViewById(R.id.doneMessage);
         if (won){
@@ -35,7 +41,9 @@ public class DoneActivity extends AppCompatActivity {
         ImageButton replayButton = (ImageButton) findViewById(R.id.replayButton);
         replayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                BluetoothActivity.sendToDE2(BluetoothConstants.startCommand);
+                // BluetoothActivity.sendToDE2(BluetoothConstants.startCommand); // uncomment later
+
+                Score.resetScore();
                 Intent intent = new Intent(DoneActivity.this, StoryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -46,6 +54,7 @@ public class DoneActivity extends AppCompatActivity {
         menuButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
+                Score.resetScore();
                 Intent intent = new Intent(DoneActivity.this, MenuActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);

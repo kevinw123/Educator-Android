@@ -7,14 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.Random;
 import java.util.Timer;
@@ -23,6 +19,9 @@ import java.util.TimerTask;
 import static com.group25.proj2.DoneActivity.setWon;
 
 public class FractionsActivity extends AppCompatActivity {
+    private TextView scoreView;
+    private TextView highscoreView;
+
     private ImageButton swipeButton;
 
     private RelativeLayout fractionLeftView;
@@ -58,6 +57,10 @@ public class FractionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fractions);
+
+        scoreView = (TextView) findViewById(R.id.scoreFractions);
+        highscoreView = (TextView) findViewById(R.id.highscoreFractions);
+        Score.drawScores(scoreView, highscoreView);
 
         fractionLeftView = (RelativeLayout) findViewById(R.id.leftFraction);
         fractionRightView = (RelativeLayout) findViewById(R.id.rightFraction);
@@ -135,11 +138,13 @@ public class FractionsActivity extends AppCompatActivity {
     }
 
     private void win(){
+        roundTimer.cancel();
         highlightWin();
+        Score.updateScore(1, scoreView, highscoreView);
 
         roundsLeft--;
         if (roundsLeft > 0){
-            Toast.makeText(getApplicationContext(), "Correct. " + roundsLeft + " more round(s)!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Correct! Rounds left: " + roundsLeft, Toast.LENGTH_LONG).show();
         }
 
         Timer timer = new Timer();

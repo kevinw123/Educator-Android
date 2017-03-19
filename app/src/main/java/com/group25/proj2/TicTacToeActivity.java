@@ -17,6 +17,9 @@ import static com.group25.proj2.DoneActivity.setWon;
 
 
 public class TicTacToeActivity extends AppCompatActivity {
+    private TextView scoreView;
+    private TextView highscoreView;
+
     public static String playerPiece;
     public static String phonePiece;
     public static boolean won;
@@ -43,6 +46,10 @@ public class TicTacToeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tic_tac_toe);
+
+        scoreView = (TextView) findViewById(R.id.scoreTTT);
+        highscoreView = (TextView) findViewById(R.id.highscoreTTT);
+        Score.drawScores(scoreView, highscoreView);
 
         initGame();
         initButtons();
@@ -342,10 +349,13 @@ public class TicTacToeActivity extends AppCompatActivity {
             if (!playerTurn){
                 drawPhonePiece(i);
             }
-        } else if (currentScore.equals("10") || currentScore.equals("-10")){
-            win();
-        } else if (currentScore.equals("0")){
-            tie();
+        } else {
+            Score.updateScore(1, scoreView, highscoreView);
+            if (currentScore.equals("10") || currentScore.equals("-10")){
+                win();
+            } else if (currentScore.equals("0")){
+                tie();
+            }
         }
     }
 

@@ -1,25 +1,23 @@
 package com.group25.proj2;
 
 import android.content.Intent;
-import android.graphics.Point;
-import android.media.Image;
 import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class QuestionsActivity extends AppCompatActivity {
     private GestureDetector gestureDetector;
     private String correctChoice;
+
+    private int score;
+    private TextView scoreView;
+    private TextView highscoreView;
 
     private int lives;
     private ImageView livesViews[];
@@ -31,6 +29,12 @@ public class QuestionsActivity extends AppCompatActivity {
 
         //BluetoothActivity.sendToDE2(BluetoothConstants.questionCommand);
         initLives();
+
+        score = 3;
+        scoreView = (TextView) findViewById(R.id.scoreQuestions);
+        highscoreView = (TextView) findViewById(R.id.highscoreQuestions);
+        Score.drawScores(scoreView, highscoreView);
+
 
         Button nextButton = (Button) findViewById(R.id.questionsNextButton);
         nextButton.setOnClickListener(new View.OnClickListener(){
@@ -131,6 +135,8 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void right(){
+        Score.updateScore(score, scoreView, highscoreView);
+
         Intent intent = new Intent(QuestionsActivity.this, StoryActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -138,6 +144,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private void wrong(){
         lives--;
+        score--;
         livesViews[lives].setImageResource(R.mipmap.hearts_black);
         if (lives == 0){
             DoneActivity.setWon(false);

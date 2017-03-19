@@ -9,11 +9,13 @@
     <dimen name="questionText_size">30sp</dimen>
     <dimen name="answerText_size">20sp</dimen>
     <dimen name="title_size">50sp</dimen>
-    <dimen name="fraction_size">100sp</dimen>
+    <dimen name="fraction_size">80sp</dimen>
     <dimen name="fraction_border">5dp</dimen>
 
     <dimen name="elevation">10px</dimen>
 
     <dimen name="lastGameButton_size">80dp</dimen>
     <dimen name="lastGameButtonText_size">20sp</dimen>
+
+    <dimen name="lastGameScore_size">20sp</dimen>
 </resources>

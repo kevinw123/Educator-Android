@@ -5,14 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
-public class LastGameActivity extends AppCompatActivity {
+public class LastGameActivity extends AppCompatActivity{
+    private TextView scoreView;
+    private TextView highscoreView;
+
     public static final int GAMEOVERDELAY = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_last_game);
+
+        scoreView = (TextView) findViewById(R.id.scoreLastGame);
+        highscoreView = (TextView) findViewById(R.id.highscoreLastGame);
+        Score.drawScores(scoreView, highscoreView);
 
         ImageButton tttButton = (ImageButton) findViewById(R.id.tttButton);
         tttButton.setOnClickListener(new View.OnClickListener(){

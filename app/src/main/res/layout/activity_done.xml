@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
+        android:text="YOU WIN!"
         android:textColor="@color/colorText"
         android:textSize="@dimen/title_size"/>
 
@@ -79,5 +80,31 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/scoreDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/highscoreDone"
+            android:text="SCORE: 0"
+            android:textSize="@dimen/lastGameScore_size"
+            android:textColor="@color/colorText"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/highscoreDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="HIGHSCORE: 0"
+            android:textSize="@dimen/lastGameScore_size"
+            android:textColor="@color/colorText"
+            android:textAlignment="center"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
