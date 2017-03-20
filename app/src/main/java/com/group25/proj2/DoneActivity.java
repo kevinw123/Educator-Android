@@ -46,7 +46,7 @@ public class DoneActivity extends AppCompatActivity {
         ImageButton replayButton = (ImageButton) findViewById(R.id.replayButton);
         replayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // BluetoothActivity.sendToDE2(BluetoothConstants.startCommand); // uncomment later
+                BluetoothActivity.sendToDE2(BluetoothConstants.startCommand);
 
                 Score.resetScore();
                 Intent intent = new Intent(DoneActivity.this, StoryActivity.class);

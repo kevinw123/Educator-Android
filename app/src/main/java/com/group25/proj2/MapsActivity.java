@@ -145,7 +145,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         if(numOfCorrect < 3) {
                             Toast.makeText(getApplicationContext(), "Correct! You picked " + selectionCountry + ". Number of correct answers: " + Integer.toString(numOfCorrect),
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
                         }
                         if(numOfCorrect == 3){
                             setWon(true);
@@ -156,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         numOfLives--;
                         if(numOfLives > 0) {
                             Toast.makeText(getApplicationContext(), "Incorrect! You picked " + selectionCountry + ". Number of lives left: " + Integer.toString(numOfLives),
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
                         }
                         if(numOfLives == 0){
                             lose();

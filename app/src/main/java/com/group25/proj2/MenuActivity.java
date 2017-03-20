@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import static com.group25.proj2.BluetoothConstants.startCommand;
+
 public class MenuActivity extends AppCompatActivity {
     private TextView highscoreView;
 
@@ -23,7 +25,7 @@ public class MenuActivity extends AppCompatActivity {
         menuPlayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 // TODO: Send PLAY flag over Bluetooth
-                //BluetoothActivity.sendToDE2(startCommand); // uncomment later
+                BluetoothActivity.sendToDE2(startCommand);
 
                 Score.resetScore();
 
