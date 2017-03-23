@@ -20,4 +20,8 @@
     <color name="colorHighlightWin">#62C5A0</color>
 
     <color name="colorBlack">#000000</color>
+
+    <color name="colorProgressStart">#765187</color>
+    <color name="colorProgressGreyEnd">#CCCCCC</color>
+    <color name="colorProgressGreyStart">#5F5E5F</color>
 </resources>

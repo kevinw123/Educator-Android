@@ -85,6 +85,7 @@ public class DoneActivity extends AppCompatActivity {
                 resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
             }else {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorWin));
+                resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -92,7 +93,7 @@ public class DoneActivity extends AppCompatActivity {
                 resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorLose, getTheme()));
             }else {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorLose));
-                thisView.setBackgroundColor(getResources().getColor(R.color.colorLose));
+                resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorLose));
             }
         }
     }
