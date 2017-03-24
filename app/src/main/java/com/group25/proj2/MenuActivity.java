@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import static com.group25.proj2.BluetoothConstants.startCommand;
 
 public class MenuActivity extends AppCompatActivity {
     private TextView highscoreView;
+    private TextView highscoreSettingsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,30 @@ public class MenuActivity extends AppCompatActivity {
                                   });
 
         dialog.show();
+
+        highscoreSettingsView = (TextView) alertLayout.findViewById(R.id.highscoreSettings);
+        Score.drawHighscore(highscoreSettingsView);
+
+        Button resetHighscoreButton = (Button) alertLayout.findViewById(R.id.resetHighscoreButtonSettings);
+        resetHighscoreButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                resetHighscoreView();
+                resetSavedHighscore();
+            }
+        });
+    }
+
+    private void resetSavedHighscore(){
+        SharedPreferences settings = getSharedPreferences(Score.PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt(Score.HIGHSCORE_PREF, Score.highscore);
+        editor.commit();
+    }
+
+    private void resetHighscoreView(){
+        Score.highscore = 0;
+        Score.drawHighscore(highscoreView);
+        Score.drawHighscore(highscoreSettingsView);
     }
 
 
