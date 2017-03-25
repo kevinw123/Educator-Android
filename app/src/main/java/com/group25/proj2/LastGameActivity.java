@@ -53,7 +53,7 @@ public class LastGameActivity extends AppCompatActivity{
         });
         clarifaiButton.setOnLongClickListener(new View.OnLongClickListener(){
             public boolean onLongClick(View v){
-                System.out.println("LONG CLICK");
+                popupInstructions(ImaggaActivity.gameTitle, ImaggaActivity.gameInstructions, ImaggaActivity.scoreInstructions, ImaggaActivity.livesInstructions);
                 return true;
             }
         });

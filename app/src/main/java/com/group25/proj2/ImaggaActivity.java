@@ -39,20 +39,30 @@ import static android.app.Activity.RESULT_OK;
 
 public class ImaggaActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
+    private static final String TAG = "ImaggaActivity";
+    public static final String gameTitle = "IMAGGA";
+    public static final String gameInstructions = "Given a word, take a picture of an object that matches the word!";
+    public static final String scoreInstructions = "For each correct picture, you get 1 point.";
+    public static final String livesInstructions = "You have 3 lives. For each incorrect country, you lose 1 life. You must find 3 countries before your lives run out!";
     private static final int CAMERA_REQUEST = 1337;
     private String[] tags = new String[10];
     private ImageView imageView;
     private String selectedImagePath;
     String[] objectArray = {"pen", "hand", "paper"};
     private static int randomNum;
+    private TextView scoreView;
+    private TextView highscoreView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagga);
         imageView = (ImageView) findViewById(R.id.image);
         Button cameraButton = (Button) findViewById(R.id.cameraButton);
+        scoreView = (TextView) findViewById(R.id.scoreImagga);
+        highscoreView = (TextView) findViewById(R.id.highscoreImagga);
+        Score.drawScores(scoreView, highscoreView);
+
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +104,7 @@ public class ImaggaActivity extends AppCompatActivity {
                 System.out.println(result);
                 if(result.contains(objectArray[randomNum])){
                     System.out.println("Got " + objectArray[randomNum]);
+                    Score.updateScore(1, scoreView, highscoreView);
                     Toast.makeText(getApplicationContext(), "Correct! Got "+ objectArray[randomNum],
                             Toast.LENGTH_SHORT).show();
                 }
