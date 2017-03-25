@@ -46,11 +46,7 @@ public class LastGameActivity extends AppCompatActivity{
         ImageButton clarifaiButton = (ImageButton) findViewById(R.id.clarifaiButton);
         clarifaiButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-
-                // TODO: Implement Clarifai game
-
-                // For testing
-                Intent intent = new Intent(LastGameActivity.this, DoneActivity.class);
+                Intent intent = new Intent(LastGameActivity.this, ImaggaActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
