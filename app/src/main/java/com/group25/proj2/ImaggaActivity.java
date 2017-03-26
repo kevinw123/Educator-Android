@@ -36,14 +36,15 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static android.app.Activity.RESULT_OK;
+import static com.group25.proj2.DoneActivity.setWon;
 
 public class ImaggaActivity extends AppCompatActivity {
 
     private static final String TAG = "ImaggaActivity";
     public static final String gameTitle = "IMAGGA";
     public static final String gameInstructions = "Given a word, take a picture of an object that matches the word!";
-    public static final String scoreInstructions = "For each correct picture, you get 1 point.";
-    public static final String livesInstructions = "You have 3 lives. For each incorrect country, you lose 1 life. You must find 3 countries before your lives run out!";
+    public static final String scoreInstructions = "If you get the correct picture, you get 1 point.";
+    public static final String livesInstructions = "You have 2 lives. For each incorrect picture, you lose 1 life. You must take a picture that matches the object before you run out of lives!";
     private static final int CAMERA_REQUEST = 1337;
     private String[] tags = new String[10];
     private ImageView imageView;
@@ -52,6 +53,7 @@ public class ImaggaActivity extends AppCompatActivity {
     private static int randomNum;
     private TextView scoreView;
     private TextView highscoreView;
+    private int numOfLives = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,6 @@ public class ImaggaActivity extends AppCompatActivity {
             String result = "";
             final Uri selectedImageUri = getImageUri(getApplicationContext(), photo);
             selectedImagePath = getPath(selectedImageUri);
-            //System.out.println(selectedImagePath);
             PostImageToImaggaAsync postImageToImaggaAsync = new PostImageToImaggaAsync(selectedImagePath);
             try {
                 result = postImageToImaggaAsync.execute().get();
@@ -105,17 +106,33 @@ public class ImaggaActivity extends AppCompatActivity {
                 if(result.contains(objectArray[randomNum])){
                     System.out.println("Got " + objectArray[randomNum]);
                     Score.updateScore(1, scoreView, highscoreView);
-                    Toast.makeText(getApplicationContext(), "Correct! Got "+ objectArray[randomNum],
-                            Toast.LENGTH_SHORT).show();
+                    setWon(true);
+                    launchGameOverScreen();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Incorrect! Try again!",
-                            Toast.LENGTH_SHORT).show();
+                    numOfLives--;
+                    if(numOfLives == 1) {
+                        Toast.makeText(getApplicationContext(), "Incorrect! You have one life left. Try again!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    if(numOfLives == 0){
+                        lose();
+                    }
                 }
             }
         }
     }
 
+    private void lose(){
+        setWon(false);
+        launchGameOverScreen();
+    }
+
+    private void launchGameOverScreen(){
+        Intent intent = new Intent(this, DoneActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
