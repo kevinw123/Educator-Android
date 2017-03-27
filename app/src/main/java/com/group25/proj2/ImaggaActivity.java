@@ -73,21 +73,30 @@ public class ImaggaActivity extends AppCompatActivity {
             }
         });
         TextView objectText = (TextView) findViewById(R.id.objectText);
+        // Get random number for object to take picture of
         randomNum = getRandomNumber();
         objectText.setText(objectArray[randomNum]);
 
     }
 
-
+    /*
+     * Generates random number for objects to take a picture of
+     */
     public int getRandomNumber(){
         Random r = new Random();
         return r.nextInt(objectArray.length);
     }
 
+    /*
+     * Prevents back button from being pressed
+     */
     @Override
     public void onBackPressed() {
     }
 
+    /*
+     * Activity triggered after picture taken from camera
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
@@ -102,6 +111,7 @@ public class ImaggaActivity extends AppCompatActivity {
 
             }
             if(result != ""){
+                // If we got the correct result, win.
                 System.out.println(result);
                 if(result.contains(objectArray[randomNum])){
                     System.out.println("Got " + objectArray[randomNum]);
@@ -110,6 +120,7 @@ public class ImaggaActivity extends AppCompatActivity {
                     launchGameOverScreen();
                 }
                 else {
+                    // Decrement Lives and check if it is 0, if so then go to lsoe screen
                     numOfLives--;
                     if(numOfLives == 1) {
                         Toast.makeText(getApplicationContext(), "Incorrect! You have one life left. Try again!",
@@ -123,17 +134,27 @@ public class ImaggaActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Lost in the game!
+     */
     private void lose(){
         setWon(false);
         launchGameOverScreen();
     }
 
+    /*
+     * Launch the Game Over screen
+     */
     private void launchGameOverScreen(){
         Intent intent = new Intent(this, DoneActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
+    /*
+     * Return the Uri of the Bitmap provided.
+     * Used to get String path to access photo
+     */
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -141,7 +162,9 @@ public class ImaggaActivity extends AppCompatActivity {
         return Uri.parse(path);
     }
 
-
+    /*
+     * Return string path of the URI given
+     */
     private String getPath(Uri uri) {
 
         String[] projection = {MediaStore.Images.Media.DATA};

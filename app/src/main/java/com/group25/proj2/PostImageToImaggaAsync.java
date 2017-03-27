@@ -36,18 +36,14 @@ public class PostImageToImaggaAsync extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
     }
 
+    /*
+     * Run the uploading image to server and image tagging in backgrgound to prevent
+     * too much work on Main UI thread.
+     */
     @Override
     protected String doInBackground(String... params) {
         try {
-            /*System.out.println("here?");
             String response = postImageToImagga(imageUri);
-            response.
-            //Log.i("imagga", response);
-            System.out.println("here2?");
-            System.out.println(response);
-            System.out.println("here3?");*/
-            String response = postImageToImagga(imageUri);
-            //System.out.println(response);
             try {
                 JSONArray person = (new JSONObject(response)).getJSONArray("uploaded");
                 String json = (new JSONObject(person.get(0).toString())).getString("id");
@@ -57,12 +53,7 @@ public class PostImageToImaggaAsync extends AsyncTask<String, String, String> {
                 e.printStackTrace();
             }
 
-
-            String result = Test();
-            //System.out.println(result);
-            /*if(result.contains("pen")){
-                System.out.println("got pen");
-            }*/
+            String result = getImaggaTags();
             return result;
 
         } catch (Exception e) {
@@ -75,10 +66,12 @@ public class PostImageToImaggaAsync extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
     }
 
-    public String Test(){
+    /*
+     * Call tagging endpoint of the imagga API to get tags for image
+     */
+    public String getImaggaTags(){
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://api.imagga.com/v1/tagging").newBuilder();
-        /*urlBuilder.addQueryParameter("url", "https://static.pexels.com/photos/39803/pexels-photo-39803.jpeg");*/
         urlBuilder.addQueryParameter("content", contentId);
         String url = urlBuilder.build().toString();
 
@@ -88,8 +81,6 @@ public class PostImageToImaggaAsync extends AsyncTask<String, String, String> {
                 .build();
         try{
             Response response = client.newCall(request).execute();
-
-            //System.out.println(response.toString());
             return response.body().string();
         } catch (IOException e){
             System.out.println("exception");
@@ -98,6 +89,10 @@ public class PostImageToImaggaAsync extends AsyncTask<String, String, String> {
         return "";
     }
 
+    /*
+     * Uploads picture taken from camera to Imagga Server
+     * ContentId received to tag it using Imagga tagging endpoint
+     */
     public String postImageToImagga(String filepath) throws Exception {
         HttpURLConnection connection = null;
         DataOutputStream outputStream = null;
