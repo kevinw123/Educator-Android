@@ -82,19 +82,23 @@ public class MovementActivity extends AppCompatActivity {
     }
 
     private void checkEnemy(){
-        String command = BluetoothActivity.readFromDE2();
-        System.out.println(command);
-        if (command.equals(BluetoothConstants.QUESTION_DE2)) {
-            Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        for(int i = 0; i < 10000; i++) {
+            String command = BluetoothActivity.readFromDE2();
+            System.out.println("received" + command);
+            if(!command.equals("")){
+                break;
+            }
+            if (command.equals(BluetoothConstants.QUESTION_DE2)) {
+                Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
         }
     }
 
     private void move(String direction){
-        // uncomment later
-        /* BluetoothActivity.sendToDE2(direction);
-        checkEnemy(); */
+        BluetoothActivity.sendToDE2(direction);
+        checkEnemy();
     }
 
     /**
