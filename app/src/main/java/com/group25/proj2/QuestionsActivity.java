@@ -12,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class QuestionsActivity extends AppCompatActivity {
+    private static Question[] questions;
+    public static int NUM_QUESTIONS = 4;
+    private int question_index;
+    private Question curQuestion;
+
     private GestureDetector gestureDetector;
     private String correctChoice;
 
@@ -27,14 +32,16 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        //BluetoothActivity.sendToDE2(BluetoothConstants.questionCommand);
+        Intent intent = getIntent();
+        question_index = intent.getIntExtra("QUESTION_INDEX", 0);
+        curQuestion = questions[question_index];
+
         initLives();
 
         score = 3;
         scoreView = (TextView) findViewById(R.id.scoreQuestions);
         highscoreView = (TextView) findViewById(R.id.highscoreQuestions);
         Score.drawScores(scoreView, highscoreView);
-
 
         Button nextButton = (Button) findViewById(R.id.questionsNextButton);
         nextButton.setOnClickListener(new View.OnClickListener(){
@@ -79,11 +86,8 @@ public class QuestionsActivity extends AppCompatActivity {
                 return answerButtonEventHandler(dButton, event, BluetoothConstants.DCommand, "D");
             }
         });
-        /*while (BluetoothActivity.readFromDE2() != "$") {
-            System.out.println("waiting for de2");
-            continue;
-        }*/
-        getQuestionFromDE2();
+
+        drawQuestionArea();
     }
 
     @Override
@@ -99,24 +103,14 @@ public class QuestionsActivity extends AppCompatActivity {
         answerView.setText(choice + ". " + answer);
     }
 
-    private void getQuestionFromDE2(){
-        /*String questionString = BluetoothActivity.readFromDE2();
-        System.out.println(questionString);
-        String[] questionArray = questionString.split(",");
+    private void drawQuestionArea(){
 
-        drawQuestion(questionArray[0]);
-        drawAnswer((TextView) findViewById(R.id.aText), "A", questionArray[1]);
-        drawAnswer((TextView) findViewById(R.id.bText), "B", questionArray[2]);
-        drawAnswer((TextView) findViewById(R.id.cText), "C", questionArray[3]);
-        drawAnswer((TextView) findViewById(R.id.dText), "D", questionArray[4]);
-        setCorrectAnswer(questionArray[5]); */
-
-        drawQuestion("What is 1 + 1?");
-        drawAnswer((TextView) findViewById(R.id.aText), "A", "1");
-        drawAnswer((TextView) findViewById(R.id.bText), "B", "2");
-        drawAnswer((TextView) findViewById(R.id.cText), "C", "3");
-        drawAnswer((TextView) findViewById(R.id.dText), "D", "4");
-        setCorrectAnswer("B");
+        drawQuestion(curQuestion.getQuestion());
+        drawAnswer((TextView) findViewById(R.id.aText), "A", curQuestion.getAnswerA());
+        drawAnswer((TextView) findViewById(R.id.bText), "B", curQuestion.getAnswerB());
+        drawAnswer((TextView) findViewById(R.id.cText), "C", curQuestion.getAnswerC());
+        drawAnswer((TextView) findViewById(R.id.dText), "D", curQuestion.getAnswerD());
+        setCorrectAnswer(curQuestion.getCorrectChoice());
     }
 
     private void initLives(){
@@ -202,5 +196,12 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
+    public static void initQuestions(){
+        questions = new Question[NUM_QUESTIONS];
 
+        questions[0] = new Question("What is 1+1?", "1", "2", "3", "4", "B");
+        questions[1] = new Question("What is the capital city of Canada?", "Vancouver, BC", "Edmonton, AB", "Toronto, ON", "Ottawa, ON", "D");
+        questions[2] = new Question("Which object is the largest?", "Elephant", "Peanut", "Moon", "Eiffel Tower", "C");
+        questions[3] = new Question("Where can you find polar bears?", "Antarctica", "Arctic", "Iceland", "Greenland", "B");
+    }
 }

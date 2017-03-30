@@ -45,17 +45,6 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin" >
 
-        <Button
-            android:id="@+id/questionsNextButton"
-            android:background="@color/colorQuestion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_alignParentRight="true"
-            android:text="NEXT"
-            android:textColor="@color/colorText" />
-
         <RelativeLayout
             android:id="@+id/questionLayout"
             android:background="@color/colorText"
@@ -115,6 +104,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true">
+
+                <Button
+                    android:id="@+id/questionsNextButton"
+                    android:background="@color/colorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/topAnswerButtons"
+                    android:layout_alignParentRight="true"
+                    android:text="NEXT"
+                    android:textColor="@color/colorQuestion" />
 
                 <LinearLayout
                     android:id="@+id/topAnswerButtons"

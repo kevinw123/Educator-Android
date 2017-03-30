@@ -26,15 +26,15 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         initHighscore();
+        QuestionsActivity.initQuestions();
 
         ImageButton menuPlayButton = (ImageButton) findViewById(R.id.menuPlayButton);
         menuPlayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 // TODO: Send PLAY flag over Bluetooth
-                //BluetoothActivity.sendToDE2(startCommand); // uncomment later
+                BluetoothActivity.sendToDE2(startCommand); // uncomment later
 
                 Score.resetScore();
-
                 Intent intent = new Intent(MenuActivity.this, StoryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);

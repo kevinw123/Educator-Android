@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".MenuActivity">
+        <activity android:name=".BluetoothActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +29,7 @@
         <activity android:name=".StoryActivity" />
         <activity android:name=".MovementActivity" />
         <activity android:name=".QuestionsActivity" />
-        <activity android:name=".BluetoothActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".TicTacToePromptActivity" />
         <activity android:name=".TicTacToeActivity" />
         <activity android:name=".DoneActivity" />

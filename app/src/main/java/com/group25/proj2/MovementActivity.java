@@ -82,19 +82,30 @@ public class MovementActivity extends AppCompatActivity {
     }
 
     private void checkEnemy(){
-        String command = BluetoothActivity.readFromDE2();
-        System.out.println(command);
-        if (command.equals(BluetoothConstants.QUESTION_DE2)) {
-            Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        String command = "";
+        while (command.equals("")){
+            command = BluetoothActivity.readFromDE2(); // uncomment later
+            //System.out.println("COMMAND FROM QUESTIONS ACTIVITY: " + command);
+        }
+
+        try {
+            int commandInt = Integer.parseInt(command);
+            if (commandInt >= 0 && commandInt < QuestionsActivity.NUM_QUESTIONS) {
+                System.out.println("RECEIVED QUESTION: " + command);
+                Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
+                intent.putExtra("QUESTION_INDEX", commandInt);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        } catch (NumberFormatException e){
+            // move command, not question
         }
     }
 
     private void move(String direction){
         // uncomment later
-        /* BluetoothActivity.sendToDE2(direction);
-        checkEnemy(); */
+        BluetoothActivity.sendToDE2(direction);
+        checkEnemy();
     }
 
     /**

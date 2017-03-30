@@ -16,7 +16,4 @@ public class BluetoothConstants {
     public static final String CCommand="C";
     public static final String DCommand="D";
 
-    public static final String MOVEMENT_DE2 = "0";
-    public static final String QUESTION_DE2 = "1";
-
 }
