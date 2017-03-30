@@ -22,6 +22,7 @@ public class MovementActivity extends AppCompatActivity {
     private ImageButton downButton;
     private ImageButton leftButton;
     private ImageButton rightButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +33,8 @@ public class MovementActivity extends AppCompatActivity {
         Score.drawScores(scoreView, highscoreView);
 
         Button nextButton = (Button) findViewById(R.id.movementNextButton);
-        nextButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -41,37 +42,37 @@ public class MovementActivity extends AppCompatActivity {
         });
 
         upButton = (ImageButton) findViewById(R.id.upButton);
-        upButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        upButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 move(BluetoothConstants.upCommand);
 
             }
         });
 
         downButton = (ImageButton) findViewById(R.id.downButton);
-        downButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        downButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 move(BluetoothConstants.downCommand);
             }
         });
 
         leftButton = (ImageButton) findViewById(R.id.leftButton);
-        leftButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 move(BluetoothConstants.leftCommand);
             }
         });
 
         rightButton = (ImageButton) findViewById(R.id.rightButton);
-        rightButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 move(BluetoothConstants.rightCommand);
             }
         });
 
         ImageButton micButton = (ImageButton) findViewById(R.id.micButton);
-        micButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        micButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 startSpeechToText();
             }
         });
@@ -81,36 +82,41 @@ public class MovementActivity extends AppCompatActivity {
     public void onBackPressed() {
     }
 
-    private void checkEnemy(){
-        String command = "";
-        while (command.equals("")){
-            command = BluetoothActivity.readFromDE2(); // uncomment later
-            //System.out.println("COMMAND FROM QUESTIONS ACTIVITY: " + command);
+    private void checkEnemy() {
+
+        for (int i = 0; i < 10000; i++) {
+            String command = BluetoothActivity.readFromDE2();
+            System.out.println("received" + command);
+
+            if (!command.equals("")) {
+
+                try {
+                    int commandInt = Integer.parseInt(command);
+                    if (commandInt >= 0 && commandInt < QuestionsActivity.NUM_QUESTIONS) {
+                        System.out.println("RECEIVED QUESTION: " + command);
+                        Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
+                        intent.putExtra("QUESTION_INDEX", commandInt);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    }
+
+                } catch (NumberFormatException e) {
+                }
+
+                break;
+            }
         }
 
-        try {
-            int commandInt = Integer.parseInt(command);
-            if (commandInt >= 0 && commandInt < QuestionsActivity.NUM_QUESTIONS) {
-                System.out.println("RECEIVED QUESTION: " + command);
-                Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
-                intent.putExtra("QUESTION_INDEX", commandInt);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-            }
-        } catch (NumberFormatException e){
-            // move command, not question
-        }
     }
 
-    private void move(String direction){
-        // uncomment later
+    private void move(String direction) {
         BluetoothActivity.sendToDE2(direction);
         checkEnemy();
     }
 
     /**
      * Start speech to text intent. This opens up Google Speech Recognition API dialog box to listen the speech input.
-     * */
+     */
     private void startSpeechToText() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -126,9 +132,10 @@ public class MovementActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
     /**
      * Callback for speech recognition activity
-     * */
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -145,20 +152,16 @@ public class MovementActivity extends AppCompatActivity {
         }
     }
 
-    private void performMovementsFromText(String result){
-        if(result.equals("up")){
+    private void performMovementsFromText(String result) {
+        if (result.equals("up")) {
             upButton.performClick();
-        }
-        else if(result.equals("down")){
+        } else if (result.equals("down")) {
             downButton.performClick();
-        }
-        else if(result.equals("right")){
+        } else if (result.equals("right")) {
             rightButton.performClick();
-        }
-        else if(result.equals("left")){
+        } else if (result.equals("left")) {
             leftButton.performClick();
-        }
-        else {
+        } else {
             System.out.println("Nothing");
         }
     }

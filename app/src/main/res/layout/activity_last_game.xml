@@ -104,21 +104,21 @@
                     android:layout_weight="1" >
 
                     <ImageButton
-                        android:id="@+id/clarifaiButton"
-                        android:background="@drawable/clarifaibutton"
+                        android:id="@+id/imaggaButton"
+                        android:background="@drawable/imaggabutton"
                         android:layout_width="@dimen/lastGameButton_size"
                         android:layout_height="@dimen/lastGameButton_size"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true" />
 
                     <TextView
-                        android:id="@+id/clarifaiButtonText"
+                        android:id="@+id/imaggaButtonText"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_below="@id/clarifaiButton"
+                        android:layout_below="@id/imaggaButton"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/buttonText_margin_top"
-                        android:text="@string/clarifaiButtonTest"
+                        android:text="@string/imaggaButtonTest"
                         android:textSize="@dimen/lastGameButtonText_size"
                         android:textColor="@color/colorText"/>
 

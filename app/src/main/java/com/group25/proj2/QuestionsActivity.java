@@ -131,7 +131,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private void right(){
         Score.updateScore(score, scoreView, highscoreView);
 
-        Intent intent = new Intent(QuestionsActivity.this, StoryActivity.class);
+        Intent intent = new Intent(QuestionsActivity.this, MovementActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }

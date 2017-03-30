@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class LastGameActivity extends AppCompatActivity{
     private TextView scoreView;
     private TextView highscoreView;
@@ -43,21 +41,17 @@ public class LastGameActivity extends AppCompatActivity{
             }
         });
 
-        ImageButton clarifaiButton = (ImageButton) findViewById(R.id.clarifaiButton);
-        clarifaiButton.setOnClickListener(new View.OnClickListener(){
+        ImageButton imaggaButton = (ImageButton) findViewById(R.id.imaggaButton);
+        imaggaButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-
-                // TODO: Implement Clarifai game
-
-                // For testing
-                Intent intent = new Intent(LastGameActivity.this, DoneActivity.class);
+                Intent intent = new Intent(LastGameActivity.this, ImaggaActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
-        clarifaiButton.setOnLongClickListener(new View.OnLongClickListener(){
+        imaggaButton.setOnLongClickListener(new View.OnLongClickListener(){
             public boolean onLongClick(View v){
-                System.out.println("LONG CLICK");
+                popupInstructions(ImaggaActivity.gameTitle, ImaggaActivity.gameInstructions, ImaggaActivity.scoreInstructions, ImaggaActivity.livesInstructions);
                 return true;
             }
         });

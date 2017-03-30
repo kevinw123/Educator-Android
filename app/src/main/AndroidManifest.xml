@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -25,15 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LastGameActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".StoryActivity" />
         <activity android:name=".MovementActivity" />
         <activity android:name=".QuestionsActivity" />
-        <activity android:name=".MenuActivity" />
         <activity android:name=".TicTacToePromptActivity" />
         <activity android:name=".TicTacToeActivity" />
         <activity android:name=".DoneActivity" />
         <activity android:name=".FractionsActivity" />
+        <activity android:name=".ImaggaActivity"/>
+	    <activity android:name=".LastGameActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -48,8 +52,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
+            android:label="@string/title_activity_maps"></activity>
+
     </application>
 
 </manifest>

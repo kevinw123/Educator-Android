@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class StoryActivity extends AppCompatActivity {
     private TextView scoreView;
     private TextView highscoreView;
-
+    private int scrollIndex = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +25,14 @@ public class StoryActivity extends AppCompatActivity {
         storyScrollButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 // TODO: Send SCROLL flag over Bluetooth
-
-                // For testing
-                Intent intent = new Intent(StoryActivity.this, MovementActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                BluetoothActivity.sendToDE2(BluetoothConstants.scrollCommand);
+                scrollIndex++;
+                if(scrollIndex == 27) {
+                    // For testing
+                    Intent intent = new Intent(StoryActivity.this, MovementActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                }
             }
         });
     }

@@ -87,7 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public int getRandomNumber(){
         Random r = new Random();
-        randomNum = r.nextInt(7);
+        randomNum = r.nextInt(8);
         return randomNum;
     }
 

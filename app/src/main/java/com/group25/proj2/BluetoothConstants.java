@@ -11,6 +11,7 @@ public class BluetoothConstants {
     public static final String downCommand = "3";
     public static final String leftCommand = "4";
     public static final String questionCommand = "5";
+    public static final String scrollCommand = "6";
     public static final String ACommand="A";
     public static final String BCommand="B";
     public static final String CCommand="C";
