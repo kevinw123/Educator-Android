@@ -47,7 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Take a picture of a"
+        android:text="TAKE A PICTURE OF:"
+        android:paddingTop="40dp"
         android:id="@+id/questionText"
         android:textSize="@dimen/lastGameButtonText_size"
         android:textColor="@color/colorText"/>
@@ -59,7 +60,7 @@
         android:paddingTop="20dp"
         android:layout_below="@+id/questionText"
         android:id="@+id/objectText"
-        android:textSize="@dimen/lastGameButtonText_size"
+        android:textSize="@dimen/title_size"
         android:textColor="@color/colorText"/>
 
     </RelativeLayout>
