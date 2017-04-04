@@ -90,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/highscoreDone"
+            android:layout_marginBottom="@dimen/buttonText_margin_top"
             android:text="SCORE: 0"
             android:textSize="@dimen/lastGameScore_size"
             android:textColor="@color/colorText"
@@ -100,6 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/viewScoresButton"
+            android:layout_marginBottom="@dimen/buttonText_margin_top"
             android:text="HIGHSCORE: 0"
             android:textSize="@dimen/lastGameScore_size"
             android:textColor="@color/colorText"
@@ -110,14 +112,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/buttonText_margin_top"
+            android:layout_marginTop="@dimen/buttonText_margin_top"
             android:padding="@dimen/activity_vertical_margin"
             android:text="VIEW SCORES"
             android:textSize="10sp"
             android:background="@color/colorText"
             android:textColor="@color/colorWin"
-            android:layout_above="@+id/resetHighscoreButton"
-            />
+            android:layout_above="@+id/resetHighscoreButton" />
 
         <Button
             android:id="@+id/resetHighscoreButton"
@@ -131,8 +132,6 @@
             android:textSize="10sp"
             android:background="@color/colorText"
             android:textColor="@color/colorWin"/>
-
-
 
     </RelativeLayout>
 
