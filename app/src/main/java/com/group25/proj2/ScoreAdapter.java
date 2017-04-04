@@ -60,7 +60,7 @@ public class ScoreAdapter extends ArrayAdapter<ScoreObject> {
         }
 
         // Populate data into template view using data object
-        viewHolder.score.setText("Score: " + Integer.toString(score.getScore()));
+        viewHolder.score.setText("SCORE: " + Integer.toString(score.getScore()));
         viewHolder.date.setText(score.getDate());
 
         return convertView;
