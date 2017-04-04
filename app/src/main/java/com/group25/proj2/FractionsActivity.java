@@ -58,6 +58,8 @@ public class FractionsActivity extends AppCompatActivity {
     private static final int ROUNDTIMELEFT_INIT = 10;
     private int roundTimeLeft;
 
+    private static boolean detectSwipe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,29 +83,41 @@ public class FractionsActivity extends AppCompatActivity {
         swipeButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        x1 = event.getX();
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        x2 = event.getX();
-                        float distance = x2 - x1;
-                        if (Math.abs(distance) > MIN_DISTANCE){
-                            if (distance < 0){
-                                checkDirection(LEFT);
-                            } else {
-                                checkDirection(RIGHT);
-                            }
+
+                if (detectSwipe) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            x1 = event.getX();
                             return true;
-                        } else {
-                            return false;
-                        }
+                        case MotionEvent.ACTION_UP:
+                            x2 = event.getX();
+                            float distance = x2 - x1;
+                            if (Math.abs(distance) > MIN_DISTANCE) {
+                                disableSwipe();
+                                if (distance < 0) {
+                                    checkDirection(LEFT);
+                                } else {
+                                    checkDirection(RIGHT);
+                                }
+                                return true;
+                            } else {
+                                return false;
+                            }
+                    }
                 }
                 return false;
             }
         });
 
         initGame();
+    }
+
+    private void disableSwipe(){
+        detectSwipe = false;
+    }
+
+    private void enableSwipe(){
+        detectSwipe = true;
     }
 
     @Override
@@ -279,6 +293,7 @@ public class FractionsActivity extends AppCompatActivity {
         drawFractions();
         setCorrectDirection();
         startTimer();
+        enableSwipe();
     }
 
     private void initGame(){
