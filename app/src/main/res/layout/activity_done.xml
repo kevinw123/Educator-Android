@@ -105,6 +105,7 @@
             android:textColor="@color/colorText"
             android:textAlignment="center"/>
 
+
         <Button
             android:id="@+id/resetHighscoreButton"
             android:layout_width="wrap_content"

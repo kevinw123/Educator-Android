@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,13 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static com.group25.proj2.TicTacToeActivity.won;
 
@@ -21,6 +28,11 @@ public class DoneActivity extends AppCompatActivity {
     private TextView scoreView;
     private TextView highscoreView;
     private Button resetHighscoreButton;
+
+    String androidId;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference mRootReference = firebaseDatabase.getReference();
+    public static DatabaseReference mChildReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +87,16 @@ public class DoneActivity extends AppCompatActivity {
         });
 
         setColors();
+
+        androidId =  Settings.Secure.getString(this.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        mChildReference = mRootReference.child(androidId);
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String formattedDate = df.format(c.getTime());
+
+        ScoreObject object = new ScoreObject(Score.score, formattedDate);
+        mChildReference.push().setValue(object);
     }
 
     private void setColors(){
@@ -122,6 +144,7 @@ public class DoneActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(Score.HIGHSCORE_PREF, Score.highscore);
         editor.commit();
+        mChildReference.removeValue();
     }
 
     private void resetHighscoreView(){

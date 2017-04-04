@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "745981191329",
+    "firebase_url": "https://cpen391mod2.firebaseio.com",
+    "project_id": "cpen391mod2",
+    "storage_bucket": "cpen391mod2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745981191329:android:85425bf4d39cc9fc",
+        "android_client_info": {
+          "package_name": "com.group25.proj2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745981191329-276otdro3aal0s1i95qll2mu28nd66ms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDo_k0XUXdk0GWri3kJ7v0IYQdz5g3HgE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
