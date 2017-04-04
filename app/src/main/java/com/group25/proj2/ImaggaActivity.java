@@ -49,7 +49,7 @@ public class ImaggaActivity extends AppCompatActivity {
     private String[] tags = new String[10];
     private ImageView imageView;
     private String selectedImagePath;
-    String[] objectArray = {"pen", "hand", "paper"};
+    String[] objectArray = {"PEN", "HAND", "PAPER"};
     private static int randomNum;
     private TextView scoreView;
     private TextView highscoreView;
@@ -113,7 +113,7 @@ public class ImaggaActivity extends AppCompatActivity {
             if(result != ""){
                 // If we got the correct result, win.
                 System.out.println(result);
-                if(result.contains(objectArray[randomNum])){
+                if(result.contains(objectArray[randomNum].toLowerCase())){
                     System.out.println("Got " + objectArray[randomNum]);
                     Score.updateScore(1, scoreView, highscoreView);
                     setWon(true);
