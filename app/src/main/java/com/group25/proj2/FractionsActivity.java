@@ -158,6 +158,8 @@ public class FractionsActivity extends AppCompatActivity {
 
     private void win(int direction){
         roundTimer.cancel();
+        Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+
         highlightWin(direction);
         Score.updateScore(1, scoreView, highscoreView);
 
@@ -182,6 +184,7 @@ public class FractionsActivity extends AppCompatActivity {
 
     private void lose(String loseMessage){
         roundTimer.cancel();
+        Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
         Toast.makeText(getApplicationContext(), loseMessage, Toast.LENGTH_LONG).show();
         Timer timer = new Timer();
         timer.schedule(new TimerTask(){

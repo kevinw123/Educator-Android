@@ -23,11 +23,12 @@ public class LastGameActivity extends AppCompatActivity{
 
         scoreView = (TextView) findViewById(R.id.scoreLastGame);
         highscoreView = (TextView) findViewById(R.id.highscoreLastGame);
-        Score.drawScores(scoreView, highscoreView);
+
 
         ImageButton tttButton = (ImageButton) findViewById(R.id.tttButton);
         tttButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
                 Intent intent = new Intent(LastGameActivity.this, TicTacToePromptActivity.class);
                 startActivity(intent);
@@ -44,6 +45,8 @@ public class LastGameActivity extends AppCompatActivity{
         ImageButton imaggaButton = (ImageButton) findViewById(R.id.imaggaButton);
         imaggaButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+
                 Intent intent = new Intent(LastGameActivity.this, ImaggaActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -59,6 +62,7 @@ public class LastGameActivity extends AppCompatActivity{
         ImageButton fractionsButton = (ImageButton) findViewById(R.id.fractionsButton);
         fractionsButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
                 Intent intent = new Intent(LastGameActivity.this, FractionsActivity.class);
                 startActivity(intent);
@@ -74,7 +78,8 @@ public class LastGameActivity extends AppCompatActivity{
 
         ImageButton flagGameButton = (ImageButton) findViewById(R.id.flagsButton);
         flagGameButton.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
+            public void onClick(View v){
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
                 Intent intent = new Intent(LastGameActivity.this, MapsActivity.class);
                 startActivity(intent);

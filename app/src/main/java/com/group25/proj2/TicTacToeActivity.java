@@ -196,6 +196,8 @@ public class TicTacToeActivity extends AppCompatActivity {
             successCount++;
             updateInfo();
         } else {
+            Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+
             int pointsPhoneInt = Integer.parseInt(pointsPhone) + 1;
             pointsPhone = Integer.toString(pointsPhoneInt);
             pointsPhoneView.setText(pointsPhone);
@@ -235,6 +237,8 @@ public class TicTacToeActivity extends AppCompatActivity {
     }
 
     private void tie(){
+        Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+
         successCount++;
         updateInfo();
 

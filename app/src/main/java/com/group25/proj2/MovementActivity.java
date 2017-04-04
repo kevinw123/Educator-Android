@@ -115,7 +115,9 @@ public class MovementActivity extends AppCompatActivity {
     }
 
     private void move(String direction) {
-        // Uncomment later
+        Audio.soundPool.play(Audio.moveSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+
+        // TODO: Uncomment later
         BluetoothActivity.sendToDE2(direction);
         checkEnemy();
     }

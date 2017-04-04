@@ -39,8 +39,10 @@ public class MenuActivity extends AppCompatActivity {
         ImageButton menuPlayButton = (ImageButton) findViewById(R.id.menuPlayButton);
         menuPlayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // TODO: Send PLAY flag over Bluetooth
-                BluetoothActivity.sendToDE2(startCommand); // uncomment later
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+
+                // TODO: uncomment later
+                BluetoothActivity.sendToDE2(startCommand);
 
                 Score.resetScore();
                 Intent intent = new Intent(MenuActivity.this, StoryActivity.class);
@@ -107,8 +109,12 @@ public class MenuActivity extends AppCompatActivity {
                 soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
             }
 
-            Audio.rightAnswerSound = soundPool.load(this, R.raw.correct, 1);
-            Audio.wrongAnswerSound = soundPool.load(this, R.raw.wrong, 2);
+            Audio.moveSound = soundPool.load(this, R.raw.move, 1);
+            Audio.rightAnswerSound = soundPool.load(this, R.raw.correct, 2);
+            Audio.wrongAnswerSound = soundPool.load(this, R.raw.wrong, 3);
+            Audio.winSound = soundPool.load(this, R.raw.win, 4);
+            Audio.loseSound = soundPool.load(this, R.raw.lose, 5);
+            Audio.pressSound = soundPool.load(this, R.raw.press, 6);
         }
     }
 

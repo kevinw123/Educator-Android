@@ -24,11 +24,12 @@ public class StoryActivity extends AppCompatActivity {
         ImageButton storyScrollButton = (ImageButton) findViewById(R.id.storyScrollButton);
         storyScrollButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                // TODO: Send SCROLL flag over Bluetooth
-                BluetoothActivity.sendToDE2(BluetoothConstants.scrollCommand); // uncomment later
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
+                // TODO: Uncomment later
+                BluetoothActivity.sendToDE2(BluetoothConstants.scrollCommand);
 
-                // Uncomment later
+                // TODO: Uncomment later
                 scrollIndex++;
                 if(scrollIndex == 27) {
                     Intent intent = new Intent(StoryActivity.this, MovementActivity.class);

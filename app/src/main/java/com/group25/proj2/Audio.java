@@ -10,10 +10,15 @@ import android.media.SoundPool;
 
 public class Audio {
     public static MediaPlayer musicPlayer;
+    public static AudioManager audioManager;
+
     public static SoundPool soundPool;
+    public static int moveSound;
     public static int rightAnswerSound;
     public static int wrongAnswerSound;
-    public static AudioManager audioManager;
+    public static int winSound;
+    public static int loseSound;
+    public static int pressSound;
 
     public static int MAX_VOLUME_STEPS = 100;
     public static int DEFAULT_VOLUME_STEPS = 50;

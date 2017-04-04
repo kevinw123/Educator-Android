@@ -144,6 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Score.updateScore(1, scoreView, highscoreView);
 
                         if(numOfCorrect < 3) {
+                            Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
                             Toast.makeText(getApplicationContext(), "Correct! You picked " + selectionCountry + ". Number of correct answers: " + Integer.toString(numOfCorrect),
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -155,6 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     } else {
                         numOfLives--;
                         if(numOfLives > 0) {
+                            Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
                             Toast.makeText(getApplicationContext(), "Incorrect! You picked " + selectionCountry + ". Number of lives left: " + Integer.toString(numOfLives),
                                     Toast.LENGTH_SHORT).show();
                         }

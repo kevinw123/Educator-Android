@@ -44,11 +44,13 @@ public class DoneActivity extends AppCompatActivity {
 
         TextView doneMessage = (TextView) findViewById(R.id.doneMessage);
         if (won){
-            // TODO: Send WON flag over Bluetooth
-            BluetoothActivity.sendToDE2(BluetoothConstants.winGameCommand);
+            Audio.soundPool.play(Audio.winSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
             doneMessage.setText("YOU WIN!");
+
+            // TODO: uncomment later
+            BluetoothActivity.sendToDE2(BluetoothConstants.winGameCommand);
         } else {
-            // TODO: Send LOSE flag over Bluetooth
+            Audio.soundPool.play(Audio.loseSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
             doneMessage.setText("YOU LOSE");
         }
 
@@ -56,6 +58,9 @@ public class DoneActivity extends AppCompatActivity {
         ImageButton replayButton = (ImageButton) findViewById(R.id.replayButton);
         replayButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+
+                // TODO: uncomment later
                 BluetoothActivity.sendToDE2(BluetoothConstants.startCommand);
 
                 Score.resetScore();
@@ -68,6 +73,7 @@ public class DoneActivity extends AppCompatActivity {
         ImageButton menuButton = (ImageButton) findViewById(R.id.menuButton);
         menuButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
                 Score.resetScore();
                 Intent intent = new Intent(DoneActivity.this, MenuActivity.class);
@@ -102,6 +108,10 @@ public class DoneActivity extends AppCompatActivity {
 
         ScoreObject object = new ScoreObject(Score.score, formattedDate);
         mChildReference.push().setValue(object);
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     private void setColors(){
