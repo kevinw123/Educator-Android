@@ -163,6 +163,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v){
                 resetHighscoreView();
                 resetSavedHighscore();
+
             }
         });
 

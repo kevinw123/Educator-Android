@@ -16,12 +16,8 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import static com.group25.proj2.TicTacToeActivity.won;
 
 public class DoneActivity extends AppCompatActivity {
     public static boolean won;
@@ -90,7 +86,7 @@ public class DoneActivity extends AppCompatActivity {
         viewScoreButton = (Button) findViewById(R.id.viewScoresButton);
         viewScoreButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(DoneActivity.this, Main2Activity.class);
+                Intent intent = new Intent(DoneActivity.this, ScoreList.class);
                 startActivity(intent);
             }
         });

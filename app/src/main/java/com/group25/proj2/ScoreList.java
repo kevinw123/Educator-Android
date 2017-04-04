@@ -2,7 +2,6 @@ package com.group25.proj2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Main2Activity extends AppCompatActivity {
+public class ScoreList extends AppCompatActivity {
 
     ArrayList<ScoreObject> scores = new ArrayList();
     private ListView mScoreListView;
@@ -21,10 +20,10 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_score_list);
 
         mScoreListView = (ListView) findViewById(R.id.list_scores);
-        scoreAdapter =  new ScoreAdapter(Main2Activity.this, scores);
+        scoreAdapter =  new ScoreAdapter(ScoreList.this, scores);
         mScoreListView.setAdapter(scoreAdapter);
     }
 
