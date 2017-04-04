@@ -45,6 +45,7 @@ public class DoneActivity extends AppCompatActivity {
         TextView doneMessage = (TextView) findViewById(R.id.doneMessage);
         if (won){
             // TODO: Send WON flag over Bluetooth
+            BluetoothActivity.sendToDE2(BluetoothConstants.winGameCommand);
             doneMessage.setText("YOU WIN!");
         } else {
             // TODO: Send LOSE flag over Bluetooth

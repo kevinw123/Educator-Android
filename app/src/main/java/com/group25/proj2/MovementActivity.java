@@ -101,6 +101,11 @@ public class MovementActivity extends AppCompatActivity {
                     }
 
                 } catch (NumberFormatException e) {
+                    if (command.equals("L")){
+                        Intent intent = new Intent(MovementActivity.this, LastGameActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    }
                 }
 
                 break;
