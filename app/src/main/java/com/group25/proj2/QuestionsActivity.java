@@ -33,6 +33,7 @@ public class QuestionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_questions);
 
         Intent intent = getIntent();
+        // TODO: change back later
         question_index = intent.getIntExtra("QUESTION_INDEX", 0);
         curQuestion = questions[question_index];
 
@@ -128,7 +129,18 @@ public class QuestionsActivity extends AppCompatActivity {
         this.correctChoice = correctChoice;
     }
 
+    private void playSound(boolean right){
+        if (Audio.playSoundFX){
+            if (right){
+                Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+            } else {
+                Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+            }
+        }
+    }
     private void right(){
+        playSound(true);
+
         Score.updateScore(score, scoreView, highscoreView);
 
         Intent intent = new Intent(QuestionsActivity.this, MovementActivity.class);
@@ -137,6 +149,7 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void wrong(){
+        playSound(false);
         lives--;
         score--;
         livesViews[lives].setImageResource(R.mipmap.hearts_black);
@@ -158,7 +171,6 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private boolean answerButtonEventHandler(Button button, MotionEvent event, String command, String choice){
         if (gestureDetector.onTouchEvent(event)) {
-            //BluetoothActivity.sendToDE2(command);
             changeButtonColorOnUp(button);
             checkChoice(choice);
             return true;

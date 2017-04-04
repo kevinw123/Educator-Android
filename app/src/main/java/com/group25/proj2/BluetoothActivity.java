@@ -74,7 +74,6 @@ public class BluetoothActivity extends AppCompatActivity {
                 aNewdevice = iter.next();
                 CreateSerialBluetoothDeviceSocket(aNewdevice);
                 ConnectToSerialBlueToothDevice();
-                WriteToBTDevice("hello$");
                 System.out.println("End");
             }
         }

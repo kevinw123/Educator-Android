@@ -110,6 +110,7 @@ public class MovementActivity extends AppCompatActivity {
     }
 
     private void move(String direction) {
+        // Uncomment later
         BluetoothActivity.sendToDE2(direction);
         checkEnemy();
     }

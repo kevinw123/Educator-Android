@@ -17,4 +17,6 @@ public class BluetoothConstants {
     public static final String CCommand="C";
     public static final String DCommand="D";
 
+    public static final String LASTGAME_DE2 = "L";
+
 }

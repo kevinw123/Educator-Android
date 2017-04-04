@@ -25,10 +25,12 @@ public class StoryActivity extends AppCompatActivity {
         storyScrollButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 // TODO: Send SCROLL flag over Bluetooth
-                BluetoothActivity.sendToDE2(BluetoothConstants.scrollCommand);
+                BluetoothActivity.sendToDE2(BluetoothConstants.scrollCommand); // uncomment later
+
+
+                // Uncomment later
                 scrollIndex++;
                 if(scrollIndex == 27) {
-                    // For testing
                     Intent intent = new Intent(StoryActivity.this, MovementActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
