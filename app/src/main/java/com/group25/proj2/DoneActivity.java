@@ -28,6 +28,7 @@ public class DoneActivity extends AppCompatActivity {
     private TextView scoreView;
     private TextView highscoreView;
     private Button resetHighscoreButton;
+    private Button viewScoreButton;
 
     String androidId;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -86,6 +87,13 @@ public class DoneActivity extends AppCompatActivity {
             }
         });
 
+        viewScoreButton = (Button) findViewById(R.id.viewScoresButton);
+        viewScoreButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(DoneActivity.this, Main2Activity.class);
+                startActivity(intent);
+            }
+        });
         setColors();
 
         androidId =  Settings.Secure.getString(this.getContentResolver(),
@@ -105,17 +113,21 @@ public class DoneActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorWin, getTheme()));
                 resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
+                viewScoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
             }else {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorWin));
                 resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
+                viewScoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorLose, getTheme()));
                 resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorLose, getTheme()));
+                viewScoreButton.setTextColor(getResources().getColor(R.color.colorLose, getTheme()));
             }else {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorLose));
                 resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorLose));
+                viewScoreButton.setTextColor(getResources().getColor(R.color.colorLose));
             }
         }
     }
