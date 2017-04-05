@@ -80,22 +80,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onBackPressed() {
     }
 
+    /*
+     * Changes the flag on the screen based on random number generated
+     */
     public void setFlagImage(){
         int i =  getRandomNumber();
         flagImage.setImageResource(flagArray[i]);
     }
 
+    /*
+     * Generates random number based on amount of flags we have in the game
+     */
     public int getRandomNumber(){
         Random r = new Random();
         randomNum = r.nextInt(8);
         return randomNum;
     }
 
+    /*
+     * Set the game won to lose and go to gameover screen
+     */
     private void lose(){
         setWon(false);
         launchGameOverScreen();
     }
 
+    /*
+     * Launch intent to go to DoneActivity
+     */
     private void launchGameOverScreen(){
         Intent intent = new Intent(this, DoneActivity.class);
         startActivity(intent);
@@ -127,6 +139,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 Marker marker = mMap.addMarker(getMarkerOptions(latLng));
                 Geocoder gcd = new Geocoder(getApplicationContext(), Locale.getDefault());
+                // Declare latitude and longitudes so we can track where user clicked
                 double latitude = latLng.latitude;
                 double longitude = latLng.longitude;
                 List<android.location.Address> addresses = new ArrayList<android.location.Address>();
@@ -138,22 +151,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 if (addresses.size() > 0)
                 {
+                    // Get the country where user clicked
                     String selectionCountry = addresses.get(0).getCountryName();
                     if(selectionCountry.equals(countryName[randomNum])){
                         numOfCorrect++;
                         Score.updateScore(1, scoreView, highscoreView);
-
+                        // If users get it correct, display a toast
                         if(numOfCorrect < 3) {
                             Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
                             Toast.makeText(getApplicationContext(), "Correct! You picked " + selectionCountry + ". Number of correct answers: " + Integer.toString(numOfCorrect),
                                     Toast.LENGTH_SHORT).show();
                         }
+                        // If users get 3 correct they win
                         if(numOfCorrect == 3){
                             setWon(true);
                             launchGameOverScreen();
                         }
+                        // Set the flag for the game
                         setFlagImage();
                     } else {
+                        // If user gets answer wrong then lose a life
                         numOfLives--;
                         if(numOfLives > 0) {
                             Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
@@ -161,6 +178,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Toast.LENGTH_SHORT).show();
                         }
                         if(numOfLives == 0){
+                            // Lose when you have no more lives
                             lose();
                         }
                     }
@@ -169,6 +187,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        // Allows for dragging marker on Google Maps
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
 
             @Override

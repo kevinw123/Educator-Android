@@ -43,7 +43,7 @@ public class ScoreAdapter extends ArrayAdapter<ScoreObject> {
 
         // Get the PinMessage that is being created
         ScoreObject score = getItem(position);
-        // Create the viewHolder that stores the Pins
+        // Create the viewHolder that stores the Scores
         ViewHolder viewHolder;
         // if there is nothing on PinBoard, add a new viewHolder
         if (convertView == null) {

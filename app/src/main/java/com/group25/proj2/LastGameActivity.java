@@ -24,7 +24,7 @@ public class LastGameActivity extends AppCompatActivity{
         scoreView = (TextView) findViewById(R.id.scoreLastGame);
         highscoreView = (TextView) findViewById(R.id.highscoreLastGame);
 
-
+        // Creating imageButtons for game icons and set listener to trigger TicTacToe on press
         ImageButton tttButton = (ImageButton) findViewById(R.id.tttButton);
         tttButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -42,6 +42,7 @@ public class LastGameActivity extends AppCompatActivity{
             }
         });
 
+        // Creating imageButtons for game icons and set listener to trigger Imagga game on press
         ImageButton imaggaButton = (ImageButton) findViewById(R.id.imaggaButton);
         imaggaButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -59,6 +60,7 @@ public class LastGameActivity extends AppCompatActivity{
             }
         });
 
+        // Creating imageButtons for game icons and set listener to trigger Fractions game on press
         ImageButton fractionsButton = (ImageButton) findViewById(R.id.fractionsButton);
         fractionsButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -76,6 +78,7 @@ public class LastGameActivity extends AppCompatActivity{
             }
         });
 
+        // Creating imageButtons for game icons and set listener to trigger Flags game on press
         ImageButton flagGameButton = (ImageButton) findViewById(R.id.flagsButton);
         flagGameButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -94,14 +97,25 @@ public class LastGameActivity extends AppCompatActivity{
         });
     }
 
+    /**
+     * Prevents users from pressing back button
+     */
     @Override
     public void onBackPressed() {
     }
 
+    /**
+     * Popup to show game instructions on the screen
+     * @param gameTitle
+     * @param gameInstructions
+     * @param scoreInstructions
+     * @param livesInstructions
+     */
     private void popupInstructions(String gameTitle, String gameInstructions, String scoreInstructions, String livesInstructions){
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.last_game_popup, null);
 
+        // TextViews to display the text to user
         TextView gameTitleView = (TextView) alertLayout.findViewById(R.id.gameTitle);
         TextView gameInstructionsView = (TextView) alertLayout.findViewById(R.id.gameInstructions);
         TextView scoreInstructionsView = (TextView) alertLayout.findViewById(R.id.scoreInstructions);
@@ -112,6 +126,7 @@ public class LastGameActivity extends AppCompatActivity{
         scoreInstructionsView.setText(scoreInstructions);
         livesInstructionsView.setText(livesInstructions);
 
+        // Create alert dialog with the textviews
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setView(alertLayout);
         alert.setCancelable(false);

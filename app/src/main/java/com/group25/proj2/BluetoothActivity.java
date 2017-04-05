@@ -150,24 +150,16 @@ public class BluetoothActivity extends AppCompatActivity {
         String s = new String("");
 
         try { // Read from the InputStream using polling and timeout
-            //while (true) { // try to read for 2 seconds max
             for (int i = 0; i < 50; i++) {
                 SystemClock.sleep(10);
                 if (mmInStream.available() > 0) {
-                    //if ((c = (byte) mmInStream.read()) == '$') // '$' terminator
-                    //break;
-                    //else
                     c = (byte) mmInStream.read();
                     s += (char) c; // build up string 1 byte by byte}
                 }
             }
         } catch (IOException e) {
-            //return new String("-- No Response --");
             return "";
         }
-
-        //int length = s.length();
-        //return s.substring(length - 1);
 
         return s;
     }
