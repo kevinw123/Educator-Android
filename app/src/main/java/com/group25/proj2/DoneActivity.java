@@ -1,16 +1,20 @@
 package com.group25.proj2;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +27,7 @@ public class DoneActivity extends AppCompatActivity {
     public static boolean won;
     private TextView scoreView;
     private TextView highscoreView;
+    private TextView confirmationTextView;
     private Button resetHighscoreButton;
     private Button viewScoreButton;
 
@@ -47,7 +52,6 @@ public class DoneActivity extends AppCompatActivity {
             Audio.soundPool.play(Audio.winSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
             doneMessage.setText("YOU WIN!");
 
-            // TODO: uncomment later
             BluetoothActivity.sendToDE2(BluetoothConstants.winGameCommand);
         } else {
             Audio.soundPool.play(Audio.loseSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
@@ -60,7 +64,6 @@ public class DoneActivity extends AppCompatActivity {
             public void onClick(View v){
                 Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
-                // TODO: uncomment later
                 BluetoothActivity.sendToDE2(BluetoothConstants.startCommand);
 
                 Score.resetScore();
@@ -85,8 +88,7 @@ public class DoneActivity extends AppCompatActivity {
         resetHighscoreButton = (Button) findViewById(R.id.resetHighscoreButton);
         resetHighscoreButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                resetHighscoreView();
-                resetSavedHighscore();
+                popupConfirmation();
             }
         });
 
@@ -170,4 +172,69 @@ public class DoneActivity extends AppCompatActivity {
         Score.highscore = 0;
         Score.drawHighscore(highscoreView);
     }
+
+    private void popupConfirmation(){
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.confirmation_popup, null);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        alert.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                resetHighscoreView();
+                resetSavedHighscore();
+            }
+        });
+        alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+
+            }
+        });
+
+        final AlertDialog dialog = alert.create();
+        dialog.setOnShowListener( new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (won){
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
+                    } else {
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorLose, getTheme()));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorLose, getTheme()));
+                    }
+                }else {
+                    if (won) {
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(getResources().getColor(R.color.colorWin));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(getResources().getColor(R.color.colorWin));
+                    } else {
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(getResources().getColor(R.color.colorLose));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(getResources().getColor(R.color.colorLose));
+                    }
+                }
+            }
+        });
+
+        dialog.show();
+
+        confirmationTextView = (TextView) alertLayout.findViewById(R.id.confirmationTitle);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (won){
+                confirmationTextView.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
+            } else {
+                confirmationTextView.setTextColor(getResources().getColor(R.color.colorLose, getTheme()));
+            }
+        }else {
+            if (won) {
+                confirmationTextView.setTextColor(getResources().getColor(R.color.colorWin));
+            } else {
+                confirmationTextView.setTextColor(getResources().getColor(R.color.colorLose));
+            }
+        }
+
+    }
 }
+
