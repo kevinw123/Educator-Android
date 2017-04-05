@@ -44,16 +44,6 @@ public class QuestionsActivity extends AppCompatActivity {
         highscoreView = (TextView) findViewById(R.id.highscoreQuestions);
         Score.drawScores(scoreView, highscoreView);
 
-        Button nextButton = (Button) findViewById(R.id.questionsNextButton);
-        nextButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(QuestionsActivity.this, LastGameActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-            }
-        });
-
-
         gestureDetector = new GestureDetector(this, new SingleTapUp());
 
         final Button aButton = (Button) findViewById(R.id.aButton);

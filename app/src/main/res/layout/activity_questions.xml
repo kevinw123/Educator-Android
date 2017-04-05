@@ -105,16 +105,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true">
 
-                <Button
-                    android:id="@+id/questionsNextButton"
-                    android:background="@color/colorText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/topAnswerButtons"
-                    android:layout_alignParentRight="true"
-                    android:text="NEXT"
-                    android:textColor="@color/colorQuestion" />
-
                 <LinearLayout
                     android:id="@+id/topAnswerButtons"
                     android:layout_width="wrap_content"

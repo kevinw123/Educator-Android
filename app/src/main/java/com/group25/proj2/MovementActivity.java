@@ -31,15 +31,7 @@ public class MovementActivity extends AppCompatActivity {
         scoreView = (TextView) findViewById(R.id.scoreMovement);
         highscoreView = (TextView) findViewById(R.id.highscoreMovement);
         Score.drawScores(scoreView, highscoreView);
-
-        Button nextButton = (Button) findViewById(R.id.movementNextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MovementActivity.this, QuestionsActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-            }
-        });
+        
 
         upButton = (ImageButton) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
