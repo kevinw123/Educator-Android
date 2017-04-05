@@ -123,8 +123,8 @@ public class DoneActivity extends AppCompatActivity {
                 viewScoreButton.setTextColor(getResources().getColor(R.color.colorWin, getTheme()));
             }else {
                 thisView.setBackgroundColor(getResources().getColor(R.color.colorWin));
-                resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorWin);
-                viewScoreButton.setTextColor(getResources().getColor(R.color.colorWin);
+                resetHighscoreButton.setTextColor(getResources().getColor(R.color.colorWin));
+                viewScoreButton.setTextColor(getResources().getColor(R.color.colorWin));
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
