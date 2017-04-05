@@ -168,7 +168,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             launchGameOverScreen();
                         }
                         // Set the flag for the game
-                        setFlagImage();
+
+                        if(numOfCorrect != 3) {
+                            setFlagImage();
+                        }
                     } else {
                         // If user gets answer wrong then lose a life
                         numOfLives--;

@@ -121,6 +121,7 @@ public class ImaggaActivity extends AppCompatActivity {
                 }
                 else {
                     // Decrement Lives and check if it is 0, if so then go to lsoe screen
+                    Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
                     numOfLives--;
                     if(numOfLives == 1) {
                         Toast.makeText(getApplicationContext(), "Incorrect! You have one life left. Try again!",
