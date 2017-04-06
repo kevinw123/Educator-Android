@@ -37,11 +37,14 @@ import java.util.Random;
 import static com.group25.proj2.DoneActivity.setWon;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    /* Instructions pop-up text (to be displayed in LastGameActivity) */
     public static final String gameTitle = "FLAGS";
     public static final String gameInstructions = "Examine the flag image. Pan and/or zoom the map, and click the flag's country!";
     public static final String scoreInstructions = "For each correct country, you get 1 point.";
     public static final String livesInstructions = "You have 3 lives. For each incorrect country, you lose 1 life. You must find 3 countries before your lives run out!";
 
+    /* Views that display score and high score */
     private TextView scoreView;
     private TextView highscoreView;
 
@@ -64,6 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        /* Draw score and high score */
         scoreView = (TextView) findViewById(R.id.scoreMaps);
         highscoreView = (TextView) findViewById(R.id.highscoreMaps);
         Score.drawScores(scoreView, highscoreView);

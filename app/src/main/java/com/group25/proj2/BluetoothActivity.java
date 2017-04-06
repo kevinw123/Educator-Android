@@ -86,6 +86,9 @@ public class BluetoothActivity extends AppCompatActivity {
         unregisterReceiver(mReceiver); // make sure we unregister
     }
 
+    /*
+     * Disable the device back button
+     */
     @Override
     public void onBackPressed() {
     }

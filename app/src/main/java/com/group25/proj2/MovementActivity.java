@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.speech.RecognizerIntent;
@@ -16,8 +15,12 @@ import java.util.Locale;
 
 public class MovementActivity extends AppCompatActivity {
     private final int SPEECH_RECOGNITION_CODE = 1;
+
+    /* Views to display score and high score */
     private TextView scoreView;
     private TextView highscoreView;
+
+    /* Movement arrow buttons */
     private ImageButton upButton;
     private ImageButton downButton;
     private ImageButton leftButton;
@@ -28,16 +31,16 @@ public class MovementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movement);
 
+        /* Draw score and high score to screen */
         scoreView = (TextView) findViewById(R.id.scoreMovement);
         highscoreView = (TextView) findViewById(R.id.highscoreMovement);
         Score.drawScores(scoreView, highscoreView);
-        
 
+        /* On movement button press, send signal to DE2 to move the character */
         upButton = (ImageButton) findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 move(BluetoothConstants.upCommand);
-
             }
         });
 
@@ -62,6 +65,7 @@ public class MovementActivity extends AppCompatActivity {
             }
         });
 
+        /* Microphone button for speech recognition of movements */
         ImageButton micButton = (ImageButton) findViewById(R.id.micButton);
         micButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -70,18 +74,29 @@ public class MovementActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Disable back button press
+     */
     @Override
     public void onBackPressed() {
     }
 
-    private void checkEnemy() {
+    /**
+     * Parse response received from DE2
+     * If DE2 detected enemy, fetch question index and switch to QuestionActivity
+     * Otherwise, if DE2 detected princess, switch to LastGameActivity
+     */
+    private void parseDE2MovementResponse() {
 
+        /* Wait for Bluetooth command */
         for (int i = 0; i < 10000; i++) {
             String command = BluetoothActivity.readFromDE2();
             System.out.println("received" + command);
 
+            /* If response received, parse it */
             if (!command.equals("")) {
 
+                /* Try parsing an integer (indicates question index) */
                 try {
                     int commandInt = Integer.parseInt(command);
                     if (commandInt >= 0 && commandInt < QuestionsActivity.NUM_QUESTIONS) {
@@ -91,9 +106,9 @@ public class MovementActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     }
-
                 } catch (NumberFormatException e) {
-                    if (command.equals("L")){
+                    /* Response is a letter, check if we should switch to LastGameActivity */
+                    if (command.equals(BluetoothConstants.LASTGAME_DE2)){
                         Intent intent = new Intent(MovementActivity.this, LastGameActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -106,12 +121,16 @@ public class MovementActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sends signal to DE2 to move the player
+     * Retrieves and parses response from DE2
+     * @param direction is the direction of movement
+     */
     private void move(String direction) {
         Audio.soundPool.play(Audio.moveSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
-        // TODO: Uncomment later
         BluetoothActivity.sendToDE2(direction);
-        checkEnemy();
+        parseDE2MovementResponse();
     }
 
     /**

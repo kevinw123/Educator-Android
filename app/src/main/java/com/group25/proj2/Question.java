@@ -12,6 +12,15 @@ public class Question {
     String answerD;
     String correctChoice;
 
+    /**
+     * Constructor for Question object
+     * @param question the question to ask
+     * @param answerA
+     * @param answerB
+     * @param answerC
+     * @param answerD
+     * @param correctChoice the correct answer
+     */
     public Question(String question, String answerA, String answerB, String answerC, String answerD, String correctChoice){
         this.question = question;
         this.answerA = answerA;

@@ -40,19 +40,25 @@ import static com.group25.proj2.DoneActivity.setWon;
 
 public class ImaggaActivity extends AppCompatActivity {
 
-    private static final String TAG = "ImaggaActivity";
+    /* Instructions pop-up text (to be displayed in LastGameActivity) */
     public static final String gameTitle = "IMAGGA";
     public static final String gameInstructions = "Given a word, take a picture of an object that matches the word!";
     public static final String scoreInstructions = "If you get the correct picture, you get 1 point.";
     public static final String livesInstructions = "You have 2 lives. For each incorrect picture, you lose 1 life. You must take a picture that matches the object before you run out of lives!";
+
+    /* Views that display score and high score */
+    private TextView scoreView;
+    private TextView highscoreView;
+
+    private static final String TAG = "ImaggaActivity";
+
     private static final int CAMERA_REQUEST = 1337;
     private String[] tags = new String[10];
     private ImageView imageView;
     private String selectedImagePath;
     String[] objectArray = {"PEN", "HAND", "PAPER"};
     private static int randomNum;
-    private TextView scoreView;
-    private TextView highscoreView;
+
     private int numOfLives = 2;
 
     @Override
@@ -61,6 +67,8 @@ public class ImaggaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_imagga);
         imageView = (ImageView) findViewById(R.id.image);
         Button cameraButton = (Button) findViewById(R.id.cameraButton);
+
+        /* Draw score and high score */
         scoreView = (TextView) findViewById(R.id.scoreImagga);
         highscoreView = (TextView) findViewById(R.id.highscoreImagga);
         Score.drawScores(scoreView, highscoreView);

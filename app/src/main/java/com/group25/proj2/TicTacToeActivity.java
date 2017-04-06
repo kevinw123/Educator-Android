@@ -17,11 +17,14 @@ import static com.group25.proj2.DoneActivity.setWon;
 
 
 public class TicTacToeActivity extends AppCompatActivity {
+
+    /* Instructions pop-up text (to be displayed in LastGameActivity) */
     public static final String gameTitle = "TIC TAC TOE";
     public static final String gameInstructions = "Pick X or O. If you are X, the phone is O. Alternate with the phone to place your mark on a 3-by-3 board. The first player to get 3 in a row (vertically, horizontally, or diagonally) wins!";
     public static final String scoreInstructions = "When you tie or win, you get 1 point.";
     public static final String livesInstructions = "You must win or tie 3 times IN A ROW to win the game!";
 
+    /* Views that display score and high score */
     private TextView scoreView;
     private TextView highscoreView;
 
@@ -52,6 +55,7 @@ public class TicTacToeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tic_tac_toe);
 
+        /* Draw score and high score */
         scoreView = (TextView) findViewById(R.id.scoreTTT);
         highscoreView = (TextView) findViewById(R.id.highscoreTTT);
         Score.drawScores(scoreView, highscoreView);

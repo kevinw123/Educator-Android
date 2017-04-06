@@ -134,7 +134,7 @@
             android:textSize="@dimen/lastGameScore_size" />
 
         <Button
-            android:id="@+id/resetHighscoreButtonSettings"
+            android:id="@+id/resetHighScoreButtonSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/highscoreSettings"

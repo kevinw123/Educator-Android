@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class Score {
     public static int score;
-    public static int highscore;
+    public static int highScore;
 
     public static final String PREF = "SHARED_PREF";
     public static final String HIGHSCORE_PREF = "HIGHSCORE";
@@ -22,7 +22,7 @@ public class Score {
     }
 
     public static void drawHighscore(TextView highscoreView){
-        highscoreView.setText("HIGHSCORE: " + Integer.toString(highscore));
+        highscoreView.setText("HIGHSCORE: " + Integer.toString(highScore));
     }
 
     public static void drawScores(TextView scoreView, TextView highscoreView){
@@ -36,8 +36,8 @@ public class Score {
 
     public static void updateScore(int scoreToAdd, TextView scoreView, TextView highscoreView){
         addScore(scoreToAdd);
-        if (score > highscore){
-            highscore = score;
+        if (score > highScore){
+            highScore = score;
         }
         drawScores(scoreView, highscoreView);
     }

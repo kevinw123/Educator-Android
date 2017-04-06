@@ -1,7 +1,6 @@
 package com.group25.proj2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +23,7 @@ public class StoryActivity extends AppCompatActivity {
         ImageButton storyScrollButton = (ImageButton) findViewById(R.id.storyScrollButton);
         storyScrollButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Audio.soundPool.play(Audio.pressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+                Audio.soundPool.play(Audio.buttonPressSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
                 // TODO: Uncomment later
                 BluetoothActivity.sendToDE2(BluetoothConstants.scrollCommand);

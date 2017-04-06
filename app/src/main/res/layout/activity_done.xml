@@ -118,10 +118,10 @@
             android:textSize="10sp"
             android:background="@color/colorText"
             android:textColor="@color/colorWin"
-            android:layout_above="@+id/resetHighscoreButton" />
+            android:layout_above="@+id/resetScoresButton" />
 
         <Button
-            android:id="@+id/resetHighscoreButton"
+            android:id="@+id/resetScoresButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

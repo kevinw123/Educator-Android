@@ -12,45 +12,52 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class QuestionsActivity extends AppCompatActivity {
-    private static Question[] questions;
-    public static int NUM_QUESTIONS = 4;
-    private int question_index;
-    private Question curQuestion;
 
-    private GestureDetector gestureDetector;
+    /* Question variables */
+    private static Question[] questions; // Defined array of Question objects
+    public static int NUM_QUESTIONS = 4;
+    private int question_index; // Index of question to display
+    private Question curQuestion; // Question object to display
     private String correctChoice;
 
-    private int score;
+    private int questionScore; // Score to receive for this question (maximum is 3, lose 1 for each life lost)
+
+    /* Views to display questionScore and high questionScore */
     private TextView scoreView;
     private TextView highscoreView;
 
+    /* Lives left (maximum is 3) */
     private int lives;
-    private ImageView livesViews[];
+    private ImageView livesViews[]; // Array of images to represent lives left
+
+    private GestureDetector gestureDetector; // Used to detect button click - onTouch and onClick interfere with each other
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
+        /* Set the question to display based on the passed in index */
         Intent intent = getIntent();
-        // TODO: change back later
         question_index = intent.getIntExtra("QUESTION_INDEX", 0);
         curQuestion = questions[question_index];
 
+        /* Initialize lives and score to receive for this question */
         initLives();
+        questionScore = 3;
 
-        score = 3;
+        /* Draw score and high score to screen */
         scoreView = (TextView) findViewById(R.id.scoreQuestions);
         highscoreView = (TextView) findViewById(R.id.highscoreQuestions);
         Score.drawScores(scoreView, highscoreView);
 
-        gestureDetector = new GestureDetector(this, new SingleTapUp());
+        gestureDetector = new GestureDetector(this, new SingleTapUp()); // Used to detect button click - onClick and onTouch interfere with each other
 
         final Button aButton = (Button) findViewById(R.id.aButton);
         aButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(aButton, event, BluetoothConstants.ACommand, "A");
+                return answerButtonEventHandler(aButton, event, "A");
             }
         });
 
@@ -58,7 +65,7 @@ public class QuestionsActivity extends AppCompatActivity {
         bButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(bButton, event, BluetoothConstants.BCommand, "B");
+                return answerButtonEventHandler(bButton, event, "B");
             }
         });
 
@@ -66,7 +73,7 @@ public class QuestionsActivity extends AppCompatActivity {
         cButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(cButton, event, BluetoothConstants.CCommand, "C");
+                return answerButtonEventHandler(cButton, event, "C");
             }
         });
 
@@ -74,28 +81,44 @@ public class QuestionsActivity extends AppCompatActivity {
         dButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return answerButtonEventHandler(dButton, event, BluetoothConstants.DCommand, "D");
+                return answerButtonEventHandler(dButton, event, "D");
             }
         });
 
         drawQuestionArea();
     }
 
+    /**
+     * Disable device back button
+     */
     @Override
     public void onBackPressed() {
     }
 
-    private void drawQuestion(String question){
+    /**
+     * Draw question to screen
+     * @param question is the question text to display
+     */
+    private void drawQuestion(String question) {
         TextView questionView = (TextView) findViewById(R.id.questionText);
         questionView.setText(question);
-    };
+    }
 
-    private void drawAnswer(TextView answerView, String choice, String answer){
+    /**
+     * Draw the answers to screen
+     * @param answerView is the view that displays an answer
+     * @param choice indicates whether answer is associated with A, B, C, D
+     * @param answer is the answer text to display
+     */
+    private void drawAnswer(TextView answerView, String choice, String answer) {
         answerView.setText(choice + ". " + answer);
     }
 
-    private void drawQuestionArea(){
-
+    /**
+     * Draws the question and multiple choice answers to screen
+     * Sets correct answer
+     */
+    private void drawQuestionArea() {
         drawQuestion(curQuestion.getQuestion());
         drawAnswer((TextView) findViewById(R.id.aText), "A", curQuestion.getAnswerA());
         drawAnswer((TextView) findViewById(R.id.bText), "B", curQuestion.getAnswerB());
@@ -104,46 +127,60 @@ public class QuestionsActivity extends AppCompatActivity {
         setCorrectAnswer(curQuestion.getCorrectChoice());
     }
 
-    private void initLives(){
+    /**
+     * Initialize lives left to 0
+     * Initialize views and display image for each life
+     */
+    private void initLives() {
         lives = 3;
         livesViews = new ImageView[3];
         livesViews[0] = (ImageView) findViewById(R.id.heart0);
         livesViews[1] = (ImageView) findViewById(R.id.heart1);
         livesViews[2] = (ImageView) findViewById(R.id.heart2);
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             livesViews[i].setImageResource(R.mipmap.hearts);
         }
     }
 
-    private void setCorrectAnswer(String correctChoice){
+    private void setCorrectAnswer(String correctChoice) {
         this.correctChoice = correctChoice;
     }
 
-    private void playSound(boolean right){
-        if (Audio.playSoundFX){
-            if (right){
-                Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
-            } else {
-                Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
-            }
+    /**
+     * Plays sound based on whether answer was correct or incorrect
+     * @param right is true if answer was correct
+     */
+    private void playSound(boolean right) {
+        if (right) {
+            Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
+        } else {
+            Audio.soundPool.play(Audio.wrongAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
         }
     }
-    private void right(){
+
+    /**
+     * Update the score and switch back to MovementActivity
+     */
+    private void right() {
         playSound(true);
 
-        Score.updateScore(score, scoreView, highscoreView);
+        Score.updateScore(questionScore, scoreView, highscoreView);
 
         Intent intent = new Intent(QuestionsActivity.this, MovementActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
-    private void wrong(){
+    /**
+     * Decrement the lives and question score, change the life image accordingly
+     * If no more lives left, switch to loss screen
+     */
+    private void wrong() {
         playSound(false);
         lives--;
-        score--;
+        questionScore--;
         livesViews[lives].setImageResource(R.mipmap.hearts_black);
-        if (lives == 0){
+        if (lives == 0) {
             DoneActivity.setWon(false);
             Intent intent = new Intent(QuestionsActivity.this, DoneActivity.class);
             startActivity(intent);
@@ -151,15 +188,28 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
-    private void checkChoice(String choice){
-        if (choice.equals(correctChoice)){
+    /**
+     * Check if answer was correct or incorrect
+     * If correct, switch to MovementActivity
+     * Otherwise, decrement lives, question score, and check if we should switch to loss screen
+     * @param choice
+     */
+    private void checkChoice(String choice) {
+        if (choice.equals(correctChoice)) {
             right();
         } else {
             wrong();
         }
     }
 
-    private boolean answerButtonEventHandler(Button button, MotionEvent event, String command, String choice){
+    /**
+     * Checks if an answer button was clicked
+     * If clicked, check if it was the correct answer
+     * @param button the button to check for click
+     * @param event
+     * @param choice is the choice associated with the button
+     */
+    private boolean answerButtonEventHandler(Button button, MotionEvent event, String choice) {
         if (gestureDetector.onTouchEvent(event)) {
             changeButtonColorOnUp(button);
             checkChoice(choice);
@@ -170,7 +220,11 @@ public class QuestionsActivity extends AppCompatActivity {
 
     }
 
-    private boolean answerButtonTouchHandler(Button button, MotionEvent event){
+    /**
+     * Checks if a button was touched
+     * Change color accordingly on touch and release
+     */
+    private boolean answerButtonTouchHandler(Button button, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             changeButtonColorOnDown(button);
             return true;
@@ -182,23 +236,23 @@ public class QuestionsActivity extends AppCompatActivity {
         return false;
     }
 
-    private void changeButtonColorOnDown(Button b){
+    private void changeButtonColorOnDown(Button b) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             b.setBackgroundColor(getResources().getColor(R.color.colorAnswerPress, getTheme()));
-        }else {
+        } else {
             b.setBackgroundColor(getResources().getColor(R.color.colorAnswerPress));
         }
     }
 
-    private void changeButtonColorOnUp(Button b){
+    private void changeButtonColorOnUp(Button b) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             b.setBackgroundColor(getResources().getColor(R.color.colorText, getTheme()));
-        }else {
+        } else {
             b.setBackgroundColor(getResources().getColor(R.color.colorText));
         }
     }
 
-    public static void initQuestions(){
+    public static void initQuestions() {
         questions = new Question[NUM_QUESTIONS];
 
         questions[0] = new Question("What is 1+1?", "1", "2", "3", "4", "B");
