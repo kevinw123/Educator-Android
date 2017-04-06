@@ -51,16 +51,25 @@ public class TicTacToePromptActivity extends AppCompatActivity {
         });
     }
 
+    /*
+     * Prevent user from clicking back button
+     */
     @Override
     public void onBackPressed() {
     }
 
+    /*
+     * Launch the game screen for TicTacToe
+     */
     protected void launchTicTacToeGame(){
         Intent intent = new Intent(this, TicTacToeActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
+    /*
+     * Change the colors of the button on the TicTacToe game
+     */
     private boolean xoButtonHandler(Button button, MotionEvent event){
         if (gestureDetector.onTouchEvent(event)) {
             changeButtonColorOnUp(button);
@@ -81,6 +90,9 @@ public class TicTacToePromptActivity extends AppCompatActivity {
         return false;
     }
 
+    /*
+     * Change Button color on click
+     */
     private void changeButtonColorOnDown(Button b){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             b.setBackgroundColor(getResources().getColor(R.color.colorBlack, getTheme()));
@@ -89,6 +101,9 @@ public class TicTacToePromptActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Animation for changing button color
+     */
     private void changeButtonColorOnUp(Button b){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             b.setBackgroundColor(getResources().getColor(R.color.colorText, getTheme()));

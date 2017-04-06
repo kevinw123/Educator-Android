@@ -47,6 +47,9 @@ public class TicTacToeActivity extends AppCompatActivity {
     private int successCount;
     private TextView gameInfoView;
 
+    /*
+     * Initialize all the points and buttons
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +66,16 @@ public class TicTacToeActivity extends AppCompatActivity {
         playerTurn = true;
     }
 
+    /*
+     * Prevents user from clicking back button
+     */
     @Override
     public void onBackPressed() {
     }
 
+    /*
+     * Check if button is empty on the tic tac toe grid
+     */
     private boolean buttonIsEmpty(String[] board, int i){
         return board[i].equals("");
     }
@@ -82,6 +91,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return false;
     }
 
+    /*
+     * Check the column of the board to see if won
+     */
     private boolean checkCol(String[] board, int i){
         int col = i % 3;
         if (board[col].equals(board[col + 3]) && board[col].equals(board[col + 6]) && !buttonIsEmpty(board, col)){
@@ -93,6 +105,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return false;
     }
 
+    /*
+     * Check the top left diagonal to see if won
+     */
     private boolean checkTopLeftDiag(String[] board){
         if (board[0].equals(board[4]) && board[0].equals(board[8]) && !buttonIsEmpty(board, 0)) {
             winCombo[0] = 0;
@@ -103,6 +118,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return false;
     }
 
+    /*
+     * Chekc the top right diagonal to see if won
+     */
     private boolean checkTopRightDiag(String[] board){
         if (board[2].equals(board[4]) && board[2].equals(board[6]) && !buttonIsEmpty(board, 2)) {
             winCombo[0] = 2;
@@ -113,6 +131,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return false;
     }
 
+    /*
+     * Check the diagonals to see if won, call both helper functions
+     */
     private boolean checkDiag(String[] board, int i){
         if (i == 0 || i == 8){
             return checkTopLeftDiag(board);
@@ -125,6 +146,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return false;
     }
 
+    /*
+     * Check the board to see if we won
+     */
     private boolean checkWin(String[] board, int i){
         if (checkRow(board, i) || checkCol(board, i) || checkDiag(board, i)){
             return true;
@@ -132,6 +156,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return false;
     }
 
+    /*
+     * Set the game won to false and go to DoneActivity
+     */
     private void launchLoseScreen(){
         setWon(false);
         Intent intent = new Intent(this, DoneActivity.class);
@@ -139,6 +166,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
+    /*
+     * Set the game won to true and go to DoneActivity
+     */
     private void launchWinScreen(){
         setWon(true);
         Intent intent = new Intent(this, DoneActivity.class);
@@ -146,6 +176,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
+    /*
+     * Reset the buttons to empty so player can replay
+     */
     private void resetButtons(){
         for (int i = 0; i < 9; i++){
             tttButtons[i].setText("");
@@ -153,6 +186,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Restart the game again
+     */
     private void restartGame(){
         resetButtons();
         spotsLeft = 9;
@@ -160,6 +196,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         playerTurn = true;
     }
 
+    /*
+     * Check to see if game is over
+     */
     private void checkGameOver(){
         if (successCount < 3){
             restartGame();
@@ -168,6 +207,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Highlight the board where we won
+     */
     private void highlightWin(){
         for (int i = 0; i < 3; i++){
             int winIndex = winCombo[i];
@@ -180,6 +222,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Display information to user
+     */
     private void updateInfo(){
         if (successCount == 3){
             gameInfoView.setText("CONGRATS! YOU WIN!");
@@ -188,6 +233,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Increase the points if we beat the AI
+     */
     private void updatePoints(){
         if (playerTurn){
             int pointsPlayerInt = Integer.parseInt(pointsPlayer) + 1;
@@ -218,6 +266,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Check if we won the game
+     */
     private void win(){
         highlightWin();
         updatePoints();
@@ -236,6 +287,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }, LastGameActivity.GAMEOVERDELAY);
     }
 
+    /*
+     * Check if we tied with AI
+     */
     private void tie(){
         Audio.soundPool.play(Audio.rightAnswerSound, Audio.convertToVolume(Audio.soundVolumeSteps), Audio.convertToVolume(Audio.soundVolumeSteps), 1, 0, 1);
 
@@ -256,6 +310,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }, LastGameActivity.GAMEOVERDELAY);
     }
 
+    /*
+     * Get an int array from string
+     */
     private ArrayList<Integer> getIntArray(ArrayList<String> stringArray){
         ArrayList<Integer> ret = new ArrayList<>();
         for (String s: stringArray){
@@ -267,6 +324,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return ret;
     }
 
+    /*
+     * Scoring for the player
+     */
     private String score(String[] board, int depth, boolean minimax, int i){
         boolean turn = playerTurn;
         if (minimax ){
@@ -288,6 +348,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Record the moves of the game
+     */
     private ArrayList<Integer> getMoves(String[] board){
         ArrayList<Integer> moves = new ArrayList<>();
         for (int i = 0; i < 9; i++){
@@ -298,6 +361,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return moves;
     }
 
+    /*
+     * Check the board to see the next state for AI
+     */
     private String[] getNextState(String[] board, int move){
         if ((playerPiece.equals("X") && !minimax_ai)
                 || (playerPiece.equals("O") && minimax_ai)){
@@ -311,6 +377,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return board;
     }
 
+    /*
+     * Undo the previous move
+     */
     private String[] undoMove(String[] board, int move){
         board[move] = "";
         spotsLeft++;
@@ -318,6 +387,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         return board;
     }
 
+    /*
+     * Get the high score of the game
+     */
     private String minimax(String[] board, int depth, int lastIndex){
         String currentScore = score(board, depth, true, lastIndex);
         if (!currentScore.equals("ONGOING")){
@@ -350,6 +422,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Change the state to next game
+     */
     private void nextGameState(int i){
         spotsLeft--;
         String currentScore = score(currentBoard, 0, false, i);
@@ -368,6 +443,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Draw the X and O to the board
+     */
     private void drawPhonePiece(int lastIndex){
         minimax_ai = true;
         minimax(currentBoard, 0, lastIndex);
@@ -381,6 +459,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         nextGameState(nextMove);
     }
 
+    /*
+     * Draw the player's piece on the board
+     */
     private void drawPlayerPiece(Button button, int i){
         if (playerTurn == true && buttonIsEmpty(currentBoard, i)){
             button.setText(playerPiece);
@@ -389,6 +470,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * See which button is clicked by user to select
+     */
     private void setButtonClickListeners(int i){
         final int index = i;
         tttButtons[i].setOnClickListener(new View.OnClickListener(){
@@ -398,6 +482,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         });
     }
 
+    /*
+     * Draw all buttons
+     */
     private void initButtons(){
         tttButtons = new Button[9];
         tttButtons[0] = (Button) findViewById(R.id.ttt0);
@@ -417,6 +504,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         Arrays.fill(currentBoard, "");
     }
 
+    /*
+     * initialize the scoring system
+     */
     private void initPoints(){
         pointsPlayerView = (TextView) findViewById(R.id.pointsPlayer);
         pointsPhoneView = (TextView) findViewById(R.id.pointsPhone);
@@ -427,11 +517,17 @@ public class TicTacToeActivity extends AppCompatActivity {
         pointsPhoneView.setText(pointsPhone);
     }
 
+    /*
+     * Initlalize instruction for users
+     */
     private void initInfo(){
         gameInfoView = (TextView) findViewById(R.id.tttInfo);
         gameInfoView.setText("WIN OR TIE 3 TIMES IN A ROW");
     }
 
+    /*
+     * Set up the game
+     */
     private void initGame(){
         initButtons();
         initPoints();
